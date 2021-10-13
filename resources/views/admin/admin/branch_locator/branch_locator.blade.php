@@ -1,40 +1,29 @@
 @extends('layouts.admin1')
 @section('content')
-<div class="section" style="background-image: url('../assets/images/bg11.jpg'); background-size: cover; background-position: top center; min-height: 750px;">
-      <div class="container">
-      <div class="row">
-            <div class="col-md-4">
-            <p class="category text-dark">Branch Locator</p>
-            <div class="card">
+<div class="section py-0" style="background: #fff;">
+      <div class="container-fluid h-100">
+        <div class="row h-100">
+          <div class="col-12 col-lg-5 col-md-6 my-auto ">
+            <div class="card d-block mx-auto px-5" style="background: transparent; box-shadow: 0 0 0;">
                 <div class="card-header">
-                    <ul class="nav nav-tabs nav-tabs-neutral justify-content-center" role="tablist" data-background-color="orange">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#bank_atm" role="tab">Bank & ATMs</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#bank_atm" role="tab">Cash Pick Up</a>
-                        </li>
-                    </ul>
+                    <img src="../assets/images/web/jrf-logo.png" alt="">
+                    <h3 class="card-title color-red title-big mt-4 mb-0">Branch Locator</h3>
+                    <div class="nav nav-tabs nav-tabs-neutral d-flex justify-content-center px-0"  role="tablist">
+                        <a class="nav-link active btn btn-tab" data-toggle="tab" href="#bank_atm" role="tab">Bank & ATMs</a>
+                        <a class="nav-link btn btn-tab" data-toggle="tab" href="#bank_atm" role="tab">Cash Pick Up</a>
+                    </div>
                 </div>
                 <div class="card-body">
                 <!-- Tab panes -->
                     <div class="tab-content">
                         <div class="tab-pane active" id="bank_atm" role="tabpanel">
                             <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="now-ui-icons ui-1_zoom-bold"></i>
-                                        </span>
-                                    </div>
-                                    <input type="text" name="address" id="address"  class="form-control font-weight-bold map-input" placeholder="Search a address here">
-                                    
-                                </div>
-                                <input type="hidden" name="latitude" id="address-latitude"  />
-                                <input type="hidden" name="longitude" id="address-longitude" />
+                                <input type="text" name="address" id="address"  class="classic-input2 form-control font-weight-bold map-input" placeholder="Search a address here">
+                                <input type="hidden" name="latitude" id="address-latitude" />
+                                <input type="hidden" name="longitude" id="address-longitude"/>
                             </div>
                             <div class="form-group text-center">
-                                <select name="province" id="province" class="form-control select2" style="width: 100%">
+                                <select name="province" id="province" class="classic-input2 form-control select2" style="width: 100%">
                                     <option value="" disabled selected>Province</option>
                                     @foreach ($provincies as $province)
                                         <option value="{{$province->province_code}}">{{$province->province_description}}</option>
@@ -46,7 +35,7 @@
                             </div>
                             <div id="cities_provincies">
                                 <div class="form-group text-center">
-                                    <select name="city" id="city" class="form-control select2" style="width: 100%">
+                                    <select name="city" id="city" class="classic-input2 form-control select2" style="width: 100%">
                                         <option value="" disabled selected>City</option>
                                             @foreach ($cities as $city)
                                                 <option value="{{$city->city_municipality_code}}">{{$city->city_municipality_description}}</option>
@@ -58,51 +47,40 @@
                                     </span>
                                 </div>
                             </div>
-                           
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="scrollable">
                                             <div id="list_of_banks">
                                                 @foreach ($banks as $bank)
-                                                    <div id="btn_bank" address="{{$bank->address}}" class="col-sm-11 btn btn-outline-primary">
+                                                    <div id="btn_bank" address="{{$bank->address}}" class="banks col-sm-11 btn">
                                                         <div class="row">
                                                             <div class="col-10">
-                                                                <h6 class="text-dark font-weight-bold">{{$bank->bank_name}}</h6>
+                                                                <h6 class="font-weight-bold text-left color-red" style="font-size: 14px">{{$bank->bank_name}}</h6>
+                                                                <p class="font-weight-bold text-left" style="color: #979797;">Print address here</p>
                                                             </div>
                                                             <div class="col-2">
-                                                                <i class="now-ui-icons travel_info" style="font-size: 23px"></i>
+                                                                <i class="now-ui-icons travel_info color-red" style="font-size: 23px"></i>
                                                             </div>
                                                         </div>
-                                                        <hr class="my-2 bg-primary">
                                                     </div>
                                                 @endforeach
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                           
-                        
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- End Tabs on plain Card -->
+          <div class="d-none d-md-block col-md-6 col-lg-7 p-0" style="background-image: url('../assets/images/bg11.jpg'); background-size: cover; background-position: top center;">
+            <div id="address-map-container" class="mb-2" style="width:100%;height:100%;">
+                <div style="width: 100%; height: 100%" id="address-map"></div>
             </div>
-            <div class="col-md-8">
-                <div class="card">
-               
-                    
-                    <div id="address-map-container" class="mb-2" style="width:100%;height:600px; ">
-                        <div style="width: 100%; height: 100%" id="address-map"></div>
-                    </div>
-                   
-                </div>
-            </div>
-          
+          </div>
         </div>
-      </div>
         
-   
+      </div>
 </div>
 
 
