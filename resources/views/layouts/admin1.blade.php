@@ -23,6 +23,7 @@
 
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="{{ asset('assets_admin/demo/demo.css') }}" rel="stylesheet" />
+  <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet" />
 
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">

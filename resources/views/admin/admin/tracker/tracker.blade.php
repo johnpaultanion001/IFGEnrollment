@@ -1,38 +1,31 @@
 @extends('layouts.admin1')
 @section('content')
-<div class="section section-signup" style="background-image: url('../assets/images/bg11.jpg'); background-size: cover; background-position: top center; min-height: 750px;">
-      <div class="container">
-        <div class="row">
-          <div class="card card-signup" data-background-color="orange">
-            <form class="form-horizontal" method="post" id="trackerForm">
-              @csrf
-              <div class="card-header text-center">
-                <h3 class="card-title title-up">Track Your Remittance</h3>
-              </div>
-              
-              <div class="card-body">
-              <div id="tracker">
-                      
-              </div>
-
-              <h4 class="text-center" id="track_another_transaction">Track Another Transaction</h4>
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="now-ui-icons files_box"></i>
-                    </span>
+<div class="section py-0" style="background: #fff;">
+      <div class="container-fluid h-100">
+        <div class="row h-100">
+          <div class="col-12 col-lg-5 col-md-6 my-auto">
+            <div class="card card-signup d-block mx-auto" style="background: transparent; box-shadow: 0 0 0;">
+                <form class="form-horizontal" method="post" id="trackerForm">
+                  @csrf
+                  <div class="card-header text-center">
+                    <img src="../assets/images/web/jrf-logo.png" alt="">
+                    <h3 class="card-title color-red title-big mt-4 mb-0">Track Your Remittance</h3>
                   </div>
-                  <input type="text" id="reference_number" name="reference_number" class="form-control font-weight-bold" placeholder="Insert Reference Number">
                   
-                </div>
-                <div id="error_reference_number" class="text-white font-weight-bold"></div>
+                  <div class="card-body">
+                    <div id="tracker">    
+                      <h4 class="text-center" id="track_another_transaction">Track Another Transaction</h4>
+                      <input type="text" id="reference_number" name="reference_number" class="classic-input form-control font-weight-bold" style="height: 40px" placeholder="Insert Reference Number">
+                      <div id="error_reference_number" class="text-white font-weight-bold"></div>
+                      <input type="button" name="track_status" id="track_status" class="btn btn-secondary mx-auto text-center d-block
+                      " value="Track Status" />
+                    </div>
+                  </div>
+                </form>
               </div>
-              <div class="card-footer text-center">
-
-              
-                <input type="button" name="track_status" id="track_status" class="btn btn-neutral btn-round btn-lg" value="Track Status" />
-              </div>
-            </form>
+            </div>
+          <div class="d-none d-md-block col-md-6 col-lg-7" style="background-image: url('../assets/images/bg11.jpg'); background-size: cover; background-position: top center;">
+            
           </div>
         </div>
         
