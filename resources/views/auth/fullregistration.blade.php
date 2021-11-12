@@ -1,11 +1,11 @@
 @extends('layouts.admin1')
 @section('content')
-<div class="section" style="background-image: url('../assets/images/bg11.jpg'); background-size: cover; background-position: top center; min-height: 750px;">
+<div class="section_register" style="background-image: url('../assets/images/bg11.jpg'); background-size: cover; background-position: top center; min-height: 750px;">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
 
-                <div class="card mx-4">
+                <div class="card ">
                     <div class="card-body p-4">
                     <h4>Compelete all Required Field</h4>
                     <br>
@@ -14,7 +14,7 @@
                             <div class="col-6 mx-4">
                                 <div class="mx-12">
                                     <div class="row">
-                                        <div class="menu1 col-sm-4 bg-primary text-center">
+                                        <div class="menu1 col-sm-4 bg-primary text-white text-center">
                                             <h3>1</h3> 
                                             <h6>TELL US ABOUT YOU</h6>
                                         </div>
@@ -821,8 +821,8 @@ $('#registerForm').on('submit', function(event){
                         $("#success-alert").slideUp(500);
                     });
 
-                    $('.menu1').removeClass('bg-primary');
-                    $('.menu2').addClass('bg-primary');
+                    $('.menu1').removeClass('bg-primary text-white');
+                    $('.menu2').addClass('bg-primary text-white');
                     $("#id_error").text('');
                     $('#tell_us_about_you').hide();
                     $('#how_can_we_contact_you').show();
@@ -848,9 +848,9 @@ $('#registerForm').on('submit', function(event){
                         $("#success-alert").slideUp(500);
                     });
 
-                    $('.menu1').removeClass('bg-primary');
-                    $('.menu2').removeClass('bg-primary');
-                    $('.menu3').addClass('bg-primary');
+                    $('.menu1').removeClass('bg-primary text-white');
+                    $('.menu2').removeClass('bg-primary text-white');
+                    $('.menu3').addClass('bg-primary text-white');
                     $('#tell_us_about_you').hide();
                     $('#how_can_we_contact_you').hide();
                     $('#create_your_beneficiary').show();
@@ -878,9 +878,9 @@ $('#registerForm').on('submit', function(event){
 $(document).on('click', '#action_back', function(){
     var action = $('#action').val();
     if(action == 'contact_info'){
-        $('.menu1').addClass('bg-primary')
-        $('.menu2').removeClass('bg-primary')
-        $('.menu3').removeClass('bg-primary')
+        $('.menu1').addClass('bg-primary text-white')
+        $('.menu2').removeClass('bg-primary text-white')
+        $('.menu3').removeClass('bg-primary text-white')
         $('#tell_us_about_you').show();
         $('#how_can_we_contact_you').hide();
         $('#create_your_beneficiary').hide();
@@ -889,9 +889,9 @@ $(document).on('click', '#action_back', function(){
         $("#action_button").attr("value", "Next");
     }
     if(action == 'create_your_beneficiary'){
-        $('.menu1').removeClass('bg-primary')
-        $('.menu2').addClass('bg-primary')
-        $('.menu3').removeClass('bg-primary')
+        $('.menu1').removeClass('bg-primary text-white')
+        $('.menu2').addClass('bg-primary text-white')
+        $('.menu3').removeClass('bg-primary text-white')
         $('#tell_us_about_you').hide();
         $('#how_can_we_contact_you').show();
         $('#create_your_beneficiary').hide();

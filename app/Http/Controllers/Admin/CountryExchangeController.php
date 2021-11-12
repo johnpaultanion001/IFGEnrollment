@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\CountryExchange;
 use Illuminate\Http\Request;
+use Validator;
 
 class CountryExchangeController extends Controller
 {
@@ -17,69 +19,80 @@ class CountryExchangeController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function store(Request $request)
     {
-        //
+        date_default_timezone_set('Asia/Manila');
+        $validated =  Validator::make($request->all(), [
+            'country' => ['required'],
+            'code' => ['required'],
+            'exchange' => ['required'],
+        ]);
+
+        if ($validated->fails()) {
+            return response()->json(['errors' => $validated->errors()]);
+        }
+
+        CountryExchange::updateOrcreate(
+            [
+                'code'   => $request->input('code'),
+            ],
+            [
+                'country'   => $request->input('country'),
+                'code'   => $request->input('code'),
+                'exchange'   => $request->input('exchange'),
+            ]
+        );
+        return response()->json(['success' => 'Added Successfully.']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\CountryExchange  $countryExchange
-     * @return \Illuminate\Http\Response
-     */
-    public function show(CountryExchange $countryExchange)
+  
+    public function show(CountryExchange $country)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\CountryExchange  $countryExchange
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(CountryExchange $countryExchange)
+    
+    public function edit(CountryExchange $country)
     {
-        //
+        if (request()->ajax()) {
+            return response()->json([
+                'result' => $country,
+            ]);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\CountryExchange  $countryExchange
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, CountryExchange $countryExchange)
+   
+    public function update(Request $request, CountryExchange $country)
     {
-        //
+        date_default_timezone_set('Asia/Manila');
+        $validated =  Validator::make($request->all(), [
+            'country' => ['required'],
+            'code' => ['required'],
+            'exchange' => ['required'],
+        ]);
+
+        if ($validated->fails()) {
+            return response()->json(['errors' => $validated->errors()]);
+        }
+        CountryExchange::find($country->id)->update(
+            [
+                'country'   => $request->input('country'),
+                'code'   => $request->input('code'),
+                'exchange'   => $request->input('exchange'),
+            ]
+        );
+        return response()->json(['success' => 'Added Successfully.']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\CountryExchange  $countryExchange
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(CountryExchange $countryExchange)
+    public function destroy(CountryExchange $country)
     {
-        //
+        return response()->json(['success' => $country->delete()]);
     }
 }

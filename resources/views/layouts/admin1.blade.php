@@ -37,7 +37,15 @@
 
   <style>
       .form-control[readonly] {
-        background-color: white;
+        background-color: whitesmoke;
+        font-weight: bold;
+      }
+      .form-control{
+        font-weight: bold;
+      }
+      .select2{
+        color: black;
+        font-weight: bold;
       }
       .active{
           font-weight: bold;
@@ -47,6 +55,8 @@
         overflow-y: auto;
         max-height: 300px;
       }
+      .pac-container { z-index: 100000 !important; }
+
      
   </style>
   @yield('styles')
@@ -138,7 +148,7 @@
             'en': 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/English.json'
             };
 
-            $.extend(true, $.fn.dataTable.Buttons.defaults.dom.button, { className: 'btn btn-sm mt-1 btn-warning ' })
+            $.extend(true, $.fn.dataTable.Buttons.defaults.dom.button, { className: 'btn btn-sm m-2 btn-primary' })
             $.extend(true, $.fn.dataTable.defaults, {
             language: {
                 url: languages['{{ app()->getLocale() }}']

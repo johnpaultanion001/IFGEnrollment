@@ -47,7 +47,7 @@
                     </div>
                   </form>
                 </div>
-                <p class="text-center mt-3 color-black" style="font-size: 13px;">Already have an account? <a href="#"><b class="color-black" style="font-weight: 700">Login here</b></a></p>
+                <p class="text-center mt-3 color-black" style="font-size: 13px;">Already have an account? <a href="/login"><b class="color-black" style="font-weight: 700">Login here</b></a></p>
               </div>
           </div>
           <div class="d-none d-md-block col-md-6 col-lg-7" style="background-image: url('../assets/images/bg11.jpg'); background-size: cover; background-position: top center;">

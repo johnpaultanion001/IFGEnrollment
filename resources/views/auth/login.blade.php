@@ -50,7 +50,7 @@
                   
                 </form>
               </div>
-              <p class="text-center mt-3 color-black" style="font-size: 13px;">Do not have an account yet? <a href="#"><b class="color-black" style="font-weight: 700">Register here</b></a></p>
+              <p class="text-center mt-3 color-black" style="font-size: 13px;">Do not have an account yet? <a href="/register"><b class="color-black" style="font-weight: 700">Register here</b></a></p>
             </div>
           </div>
           <div class="d-none d-md-block col-md-6 col-lg-7" style="background-image: url('../assets/images/bg11.jpg'); background-size: cover; background-position: top center;">

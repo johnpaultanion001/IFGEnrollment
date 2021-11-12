@@ -19,6 +19,7 @@ class CreateBanksTable extends Migration
             $table->string('province_code');
             $table->string('city_municipality_code');
             $table->longText('address');
+            $table->string('status')->default('BANK');
             $table->timestamps();
             $table->softDeletes();
         });

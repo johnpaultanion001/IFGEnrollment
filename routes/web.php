@@ -3,13 +3,6 @@ use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\BranchLocatorController;
 use App\Http\Controllers\Admin\ContactUsController;
 
-// Route::get('/', function () {
-//     if (session('status')) {
-//         return redirect()->route('admin.shops.index')->with('status', session('status'));
-//     }
-
-//     return redirect()->route('admin.shops.index');
-// });
 
 Route::redirect('/', '/admin/home');
 
@@ -26,8 +19,6 @@ Route::post('/branch_locator/cities_province_banks', [BranchLocatorController::c
 Route::get('/contactus', [ContactUsController::class, 'index'])->name('contactus.contactus');
 Route::post('/contactus', [ContactUsController::class, 'store'])->name('contactus.store');
 
-Route::get('/', 'HomeController@index')->name('home');
-Route::get('shop/{shop}', 'HomeController@show')->name('shop');
 
 Auth::routes(['verify' => true]);
 
@@ -78,7 +69,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('recipient', 'BeneficiaryController@recipient')->name('recipient.recipient');
     Route::get('recipient/load', 'BeneficiaryController@loadrecipient')->name('recipient.loadrecipient');
     
+    //Admin
+    Route::get('/0/home', 'AdminController@index')->name('admin.index');
+    Route::put('/0/home/trasaction/status', 'AdminController@status')->name('transation.status');
+    Route::put('/0/home/trasaction/payment', 'AdminController@payment')->name('transation.payment');
     
+    //Country Receipt
+    Route::resource('countries', 'CountryExchangeController');
+    Route::resource('banks', 'BankController');
     
 });
 

@@ -61,7 +61,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-9">
-                                        <h6 class="card-subtitle mb-2 text-danger">{{ Auth::user()->created_at->format('F d,Y h:i A') }}</h6>
+                                        <h6 class="card-subtitle mb-2 text-danger">{{ Auth::user()->updated_at->format('F d,Y h:i A') }}</h6>
                                         <h6 class="card-subtitle mb-2 text-muted">Your last login</h6>
                                         
                                     </div>
@@ -120,7 +120,7 @@
                                             <span>Service Change</span>
                                         </div>
                                         <div class="col-6">
-                                            <span class="text-danger">0 JPY</span>
+                                            <span id="total_service" class="text-danger">0 JPY</span>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -452,10 +452,19 @@
                                         <div class="input-group-append">
                                             <span class="input-group-text font-weight-bold">JPY</span>
                                         </div>
+                                        
                                     </div>
+                                    
                                     <div id="error_send_amount" class="error_transaction text-danger"></div>
                                 </div>
+                                <div class="col-sm-4 mx-auto">
+                                        <button type="button" class="btn btn-primary" id="compute">
+                                            Compute
+                                            <i class="pl-2 fas fa-calculator"></i>
+                                        </button>
+                                </div>
                             </div>
+                            
                         </div>    
                         <div class="col-sm-12"> 
                             <div class="col-sm-8 mx-auto">
@@ -557,7 +566,7 @@
                                                         <div class="row">
                                                             <div class="col-7">
                                                                 <div class="form-group">
-                                                                    <input type="number" name="service_charge" id="service_charge" placeholder="0.00" step="any" style="width: 100%"/> 
+                                                                    <input type="number" readonly name="service_charge" id="service_charge" placeholder="0.00" step="any" style="width: 100%"/> 
                                                                     <div id="error_service_charge" class="error_transaction text-danger"></div>
                                                                 </div>
                                                             </div>
@@ -783,46 +792,36 @@ $('#beneficiaryForm').on('submit', function(event){
     });
 });
 
-$('#send_amount').on('keyup', function(){
+
+$(document).on('click', '#compute', function(event){
     var sendamount = $('#send_amount').val();
-    var beneficiary = $('#transaction_beneficiary_id').val()
-    var service_charge = $('#service_charge').val()
+    var beneficiary = $('#transaction_beneficiary_id').val();
     var _token =  $('input[name="_token"]').val();
-    $.ajax({
+
+    if(sendamount < 1000){
+        alert('Send ammount must be 1000')
+    }else{
+        $.ajax({
             url:"{{ route('admin.sendamount') }}",
             method:"POST",
             dataType: "json",
-            data:{beneficiary:beneficiary, sendamount:sendamount, service_charge:service_charge , _token:_token},
+            data:{beneficiary:beneficiary, sendamount:sendamount, _token:_token},
             beforeSend: function() {
                 
             },
             success:function(data){
-                $('#receive_amount').val(parseFloat(data.receive.toFixed(2)));
-                $('#they_get').val(parseFloat(data.receive.toFixed(2)));
+                $('#receive_amount').val(data.receive);
+                $('#they_get').val(data.receive);
                 $('#you_send').val(data.send);
                 $('#total').val(data.total);
+                $('#service_charge').val(data.charge);
 
             }
         });
+    }
+   
 });
 
-$('#service_charge').on('keyup', function(){
-    var charge = $('#service_charge').val();
-    var sendamount = $('#send_amount').val();
-    var _token =  $('input[name="_token"]').val();
-    $.ajax({
-            url:"{{ route('admin.servicecharge') }}",
-            method:"POST",
-            dataType: "json",
-            data:{sendamount:sendamount, charge:charge , _token:_token},
-            beforeSend: function() {
-                
-            },
-            success:function(data){
-                $('#total').val(data.total);
-            }
-        });
-});
 
 $('#transactionForm').on('submit', function(event){
     event.preventDefault();
@@ -964,7 +963,8 @@ $('select[name="select_exchange"]').on("change", function(event){
     if(send == ''){
         $('#error_exchange_send').text('You send field is required. Please input a number');
         $('#select_exchange').val(null).trigger('change');
-    }else{
+    }
+    else{
         if(exchange != ''){
             $.ajax({
                 url:"{{ route('admin.home.exchangerate') }}",
@@ -979,6 +979,7 @@ $('select[name="select_exchange"]').on("change", function(event){
                     $('#value_exchange').text(data.value + ' ' + data.code);
                     $('#exchange_get').val(parseFloat(data.receive.toFixed(2)));
                     $('#total_exchange').text(data.total + ' JPY');
+                    $('#total_service').text(data.charge + ' JPY')
                    
                 }
             });
@@ -992,6 +993,9 @@ $('#exchange_send').on('keyup' , function(){
     $('#select_exchange').val(null).trigger('change');
     $('#exchange_get').val('0.00');
     $('#total_exchange').text('0 JPY');
+    $('#total_service').text('0 JPY');
 });
+
+
 </script>
 @endsection

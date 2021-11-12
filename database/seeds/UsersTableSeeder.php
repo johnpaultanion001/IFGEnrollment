@@ -43,7 +43,7 @@ class UsersTableSeeder extends Seeder
             ],
             [
                 'id'             => 2,
-                'email'          => 'johnpaultanion@gmail.com',
+                'email'          => 'user@user.com',
                 'password'       => '$2y$10$vUIzDlvfpu2yOATsPYcPaOTY/zgbgwViLIWSfZxSlmRBFV.g/fmOW',
                 'firstname'      => 'Johnpaul',
                 'middlename'      => 'Valdez',
@@ -80,7 +80,6 @@ class UsersTableSeeder extends Seeder
                 'code'             => 'PHP',
                 'exchange'             => 0.46,
                 'created_at' => '2021-09-27 18:59:31',
-                'created_at' => '2021-09-27 18:59:31',
                 'updated_at' => '2021-09-27 19:07:34',
                 
             ],
@@ -90,13 +89,5 @@ class UsersTableSeeder extends Seeder
         User::insert($users);
         CountryExchange::insert($ce);
 
-        // foreach(range(1,10) as $id)
-        // {
-        //     User::create([
-        //         'name' => $faker->unique()->name,
-        //         'email' => "user$id@user$id.com",
-        //         'password' => bcrypt('password'),
-        //     ]);
-        // }
     }
 }

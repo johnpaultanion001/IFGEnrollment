@@ -5952,6 +5952,12 @@ img {
   background: #FFFFFF;
 }
 
+.section_register {
+  padding: 70px 0;
+  position: relative;
+  background: #FFFFFF;
+}
+
 .section .row+.category {
   margin-top: 15px;
 }

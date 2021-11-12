@@ -15,6 +15,7 @@ class Bank extends Model
         'province_code',
         'city_municipality_code',
         'address',
+        'status',
 
         'created_at',
         'updated_at',

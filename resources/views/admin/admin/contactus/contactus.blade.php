@@ -15,16 +15,16 @@
                     639176760070 | philippines@jpremit.com<br>
                     </p>
                     <div class="social-line">
-                      <a href="#" class="btn btn-primary  btn-icon btn-round">
+                      <a href="https://www.facebook.com/jrfphilsofficial" target="_blank" class="btn btn-primary  btn-icon btn-round">
                         <i class="fab fa-facebook-square"></i>
                       </a>
-                      <a href="#" class="btn btn-primary  btn-icon btn-round">
+                      <a href="https://www.youtube.com/channel/UC1HYwPpVu6gmUv2sifCj7TQ" target="_blank" class="btn btn-primary  btn-icon btn-round">
                         <i class="fab fa-youtube"></i>
                       </a>
-                      <a href="#" class="btn btn-primary btn-icon btn-round">
+                      <a href="https://www.instagram.com/jrfphilsofficial" target="_blank" class="btn btn-primary btn-icon btn-round">
                         <i class="fab fa-instagram"></i>
                       </a>
-                      <a href="#" class="btn btn-primary btn-icon btn-round">
+                      <a href="https://www.tiktok.com/@jrfphilsofficial" target="_blank" class="btn btn-primary btn-icon btn-round">
                         <i class="fab fa-tiktok"></i>
                       </a>
                     </div>

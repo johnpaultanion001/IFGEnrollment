@@ -224,7 +224,7 @@
                 </div>
 
                     
-                <!-- Modal body -->
+                <!-- Modal body --> 
                 <div class="modal-body">
                     <div id="transaction_form" class="row">
                         
@@ -244,6 +244,12 @@
                                         </div>
                                     </div>
                                     <div id="error_send_amount" class="error_transaction text-danger"></div>
+                                </div>
+                                <div class="col-sm-4 mx-auto">
+                                        <button type="button" class="btn btn-primary" id="compute">
+                                            Compute
+                                            <i class="pl-2 fas fa-calculator"></i>
+                                        </button>
                                 </div>
                             </div>
                         </div>    
@@ -347,7 +353,7 @@
                                                         <div class="row">
                                                             <div class="col-7">
                                                                 <div class="form-group">
-                                                                    <input type="number" name="service_charge" id="service_charge" placeholder="0.00" step="any" style="width: 100%"/> 
+                                                                    <input type="number" readonly name="service_charge" id="service_charge" placeholder="0.00" step="any" style="width: 100%"/> 
                                                                     <div id="error_service_charge" class="error_transaction text-danger"></div>
                                                                 </div>
                                                             </div>
@@ -694,46 +700,35 @@ $(document).on('click', '.send_money_beneficiary', function(){
   
 });
 
-$('#send_amount').on('keyup', function(){
+$(document).on('click', '#compute', function(event){
     var sendamount = $('#send_amount').val();
-    var beneficiary = $('#transaction_beneficiary_id').val()
-    var service_charge = $('#service_charge').val()
+    var beneficiary = $('#transaction_beneficiary_id').val();
     var _token =  $('input[name="_token"]').val();
-    $.ajax({
+
+    if(sendamount < 1000){
+        alert('Send ammount must be 1000')
+    }else{
+        $.ajax({
             url:"{{ route('admin.sendamount') }}",
             method:"POST",
             dataType: "json",
-            data:{beneficiary:beneficiary, sendamount:sendamount, service_charge:service_charge , _token:_token},
+            data:{beneficiary:beneficiary, sendamount:sendamount, _token:_token},
             beforeSend: function() {
                 
             },
             success:function(data){
-                $('#receive_amount').val(parseFloat(data.receive.toFixed(2)));
-                $('#they_get').val(parseFloat(data.receive.toFixed(2)));
+                $('#receive_amount').val(data.receive);
+                $('#they_get').val(data.receive);
                 $('#you_send').val(data.send);
                 $('#total').val(data.total);
+                $('#service_charge').val(data.charge);
 
             }
         });
+    }
+   
 });
 
-$('#service_charge').on('keyup', function(){
-    var charge = $('#service_charge').val();
-    var sendamount = $('#send_amount').val();
-    var _token =  $('input[name="_token"]').val();
-    $.ajax({
-            url:"{{ route('admin.servicecharge') }}",
-            method:"POST",
-            dataType: "json",
-            data:{sendamount:sendamount, charge:charge , _token:_token},
-            beforeSend: function() {
-                
-            },
-            success:function(data){
-                $('#total').val(data.total);
-            }
-        });
-});
 
 $('#transactionForm').on('submit', function(event){
     event.preventDefault();

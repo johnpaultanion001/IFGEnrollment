@@ -20,6 +20,8 @@ class BankSeeder extends Seeder
                 'province_code' => '0458',
                 'city_municipality_code' => '045802',
                 'address' => 'Ground Floor Victory Park & Shop ML Quezon and, P. Oliveros Street, Antipolo, 1870 Rizal',
+                'created_at' => '2021-09-27 18:59:31',
+                'updated_at' => '2021-09-27 19:07:34',
             ],
            
         ];

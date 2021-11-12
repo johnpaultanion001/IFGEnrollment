@@ -67,11 +67,11 @@
                             <i class="now-ui-icons ui-1_settings-gear-63" aria-hidden="true"></i>
                           </a>
                           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">My Account</a>
+                            <a class="dropdown-item" href="/admin/fullregistration">My Account</a>
                             <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">Logout</a>
-                            @if(Auth::user()->roles()->pluck('title')->implode(', ') == 'Admin')
-                              <a class="dropdown-item" href="#">Admin Page</a>
-                            @endif
+                            @can('admin_access')
+                              <a class="dropdown-item" href="/admin/0/home">Administration</a>
+                            @endcan
                           </div>
                         </li>
                       @endif

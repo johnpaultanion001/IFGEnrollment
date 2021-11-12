@@ -29,7 +29,7 @@ class TransactionController extends Controller
         return response()->json([
             'beneficiary_name' => $transaction->beneficiary->beneficiary_firstname .' '. $transaction->beneficiary->beneficiary_lastname,
             'order_id' => $transaction->id,
-            'bank_name' => $transaction->beneficiary->bank_name,
+            'bank_name' => $transaction->beneficiary->bank->bank_name,
             'account_number' => $transaction->beneficiary->account_number,
 
             'send_amount' => $transaction->send_amount,
@@ -44,7 +44,6 @@ class TransactionController extends Controller
         date_default_timezone_set('Asia/Manila');
         $validated =  Validator::make($request->all(), [
             'send_amount' => ['required' ,'numeric','min:1'],
-            'service_charge' => ['required' ,'numeric','min:0'],
             'transaction_source_of_fund' => ['required'],
         ]);
 
@@ -129,16 +128,26 @@ class TransactionController extends Controller
         $beneciary_id = $request->get('beneficiary');
         $beneciary = Beneficiary::findorfail($beneciary_id);
         $send = $request->get('sendamount');
-        $service_charge =  $request->get('service_charge');
 
-        $receive = $send * $beneciary->country->exchange;
-        $total = $send + $service_charge;
+        if($send < 10001){
+            $charge = 500;  
+        }
+        elseif($send < 300001){
+            $charge = 1000;  
+        }
+        elseif($send < 1000000){
+            $charge = 1500;  
+        }
+            
+
+        $total_send = $send - $charge;
+        $total_receive = $total_send * $beneciary->country->exchange;
 
         return response()->json([
-            'receive' => $receive,
-            'send' => $send,
-            'total' => $total,
-            
+            'receive' => $total_receive,
+            'send' => $total_send,
+            'total' => $send,
+            'charge' => $charge,
         ]);
     
        

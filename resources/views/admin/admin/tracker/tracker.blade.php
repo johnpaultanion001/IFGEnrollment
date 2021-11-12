@@ -13,13 +13,13 @@
                   </div>
                   
                   <div class="card-body">
-                    <div id="tracker">    
+                    <div id="tracker">   </div> 
                       <h4 class="text-center" id="track_another_transaction">Track Another Transaction</h4>
                       <input type="text" id="reference_number" name="reference_number" class="classic-input form-control font-weight-bold" style="height: 40px" placeholder="Insert Reference Number">
                       <div id="error_reference_number" class="text-white font-weight-bold"></div>
                       <input type="button" name="track_status" id="track_status" class="btn btn-secondary mx-auto text-center d-block
                       " value="Track Status" />
-                    </div>
+                    
                   </div>
                 </form>
               </div>

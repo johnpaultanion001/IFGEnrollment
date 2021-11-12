@@ -21,7 +21,7 @@ class HomeController
     {
         $userid = auth()->user()->id;
         $countries = CountryExchange::latest()->get();
-        $banks = Bank::latest()->get();
+        $banks = Bank::where('status', 'BANK')->latest()->get();
 
         $last_amount_transfer = Transaction::where('user_id' ,$userid)->where('isConfirm' , 1)->latest()->first(); 
         $total_transfer = Transaction::where('user_id' ,$userid)->where('isConfirm' , 1)->sum('send_amount');
@@ -41,19 +41,31 @@ class HomeController
         $send = $request->get('send');  
         $exchange = CountryExchange::findorfail($request->get('exchange'));
 
-        $receive = $send * $exchange->exchange;
+        if($send < 10001){
+            $charge = 500;  
+        }
+        elseif($send < 300001){
+            $charge = 1000;  
+        }
+        elseif($send < 1000000){
+            $charge = 1500;  
+        }
+
+        $total_send = $send - $charge;
+        $total_receive = $total_send * $exchange->exchange;
+
         
         return response()->json([
-            'receive' => $receive,
+            'receive' => $total_receive,
             'value' => $exchange->exchange,
             'code' => $exchange->code,
             'total' => $send,
+            'charge' => $charge,
         ]);
-    
     }
     public function fullregistration(){
         $countries = CountryExchange::latest()->get();
-        $banks = Bank::latest()->get();
+        $banks = Bank::where('status', 'BANK')->latest()->get();
         return view('auth.fullregistration' , compact('countries','banks'));
     }
 

@@ -1,85 +1,104 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Bank;
+use Validator;
 use Illuminate\Http\Request;
+
+
 
 class BankController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+   
+   
     public function store(Request $request)
     {
-        //
+        date_default_timezone_set('Asia/Manila');
+        $validated =  Validator::make($request->all(), [
+            'bank_name' => ['required'],
+            'province_code' => ['required'],
+            'city_municipality_code' => ['required'],
+            'address' => ['required'],
+        ]);
+
+        if ($validated->fails()) {
+            return response()->json(['errors' => $validated->errors()]);
+        }
+
+        Bank::updateOrcreate(
+        [
+            'address'   => $request->input('address'),
+        ],
+        [
+            'bank_name'   => $request->input('bank_name'),
+            'province_code'   => $request->input('province_code'),
+            'city_municipality_code'   => $request->input('city_municipality_code'),
+            'address'   => $request->input('address'),
+            'status'   => $request->input('record_status'),
+        ]);
+        return response()->json(['success' => 'Added Successfully.']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Bank  $bank
-     * @return \Illuminate\Http\Response
-     */
+   
     public function show(Bank $bank)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Bank  $bank
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Bank $bank)
     {
-        //
+        if (request()->ajax()) {
+            return response()->json([
+                'result' => $bank,
+                'province'  => $bank->province->province_description,
+            ]);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Bank  $bank
-     * @return \Illuminate\Http\Response
-     */
+   
     public function update(Request $request, Bank $bank)
     {
-        //
+        date_default_timezone_set('Asia/Manila');
+        $validated =  Validator::make($request->all(), [
+            'bank_name' => ['required'],
+            'province_code' => ['required'],
+            'city_municipality_code' => ['required'],
+            'address' => ['required'],
+        ]);
+
+        if ($validated->fails()) {
+            return response()->json(['errors' => $validated->errors()]);
+        }
+        
+        Bank::find($bank->id)->update(
+        [
+            'bank_name'   => $request->input('bank_name'),
+            'province_code'   => $request->input('province_code'),
+            'city_municipality_code'   => $request->input('city_municipality_code'),
+            'address'   => $request->input('address'),
+        ]);
+        return response()->json(['success' => 'Updated Successfully.']);
+
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Bank  $bank
-     * @return \Illuminate\Http\Response
-     */
+   
     public function destroy(Bank $bank)
     {
-        //
+        return response()->json(['success' => $bank->delete()]);
     }
 }

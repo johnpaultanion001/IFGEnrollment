@@ -27,6 +27,7 @@ class CreateTransactionsTable extends Migration
             $table->string('transaction_source_of_fund');
             $table->integer('isConfirm')->default(0);
             $table->integer('status')->default(0);
+            $table->boolean('isPaid')->default(false);
 
             $table->timestamps();
             $table->softDeletes();

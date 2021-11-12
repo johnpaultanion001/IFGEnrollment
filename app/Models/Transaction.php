@@ -23,6 +23,7 @@ class Transaction extends Model
         'transaction_source_of_fund',
         'transaction_purpose_of_remit',
         'isConfirm',
+        'isPaid',
         
         'created_at',
         'updated_at',
