@@ -16,9 +16,8 @@ class BranchLocatorController extends Controller
     {
         $provincies = Province::all();
         $cities = City::all();
-        $banks = Bank::latest()->get();
 
-        return view('admin.admin.branch_locator.branch_locator' , compact('provincies', 'cities' ,'banks'));
+        return view('admin.admin.branch_locator.branch_locator' , compact('provincies', 'cities'));
     }
     public function cities_province(Request $request)
     {
@@ -41,7 +40,7 @@ class BranchLocatorController extends Controller
         {
             $query->where('city_municipality_code', $request->get('city'));
         }
-        $banks = $query->latest()->get();
+        $banks = $query->where('status', $request->get('status'))->latest()->get();
         return view('admin.admin.branch_locator.cities_provincies_banks' , compact('banks'));
     }
 
