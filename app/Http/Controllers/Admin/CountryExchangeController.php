@@ -4,19 +4,20 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\CountryExchange;
+use App\Models\CountryExchangeRecord;
 use Illuminate\Http\Request;
 use Validator;
+use Gate; 
+use Symfony\Component\HttpFoundation\Response;
 
 class CountryExchangeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index()
     {
-        //
+        abort_if(Gate::denies('staff_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $countries   = CountryExchange::latest()->get();
+        return view('administration.staff.exchange_rate.exchange_rate' , compact('countries'));
     }
 
    
@@ -39,7 +40,7 @@ class CountryExchangeController extends Controller
             return response()->json(['errors' => $validated->errors()]);
         }
 
-        CountryExchange::updateOrcreate(
+        $record = CountryExchange::updateOrcreate(
             [
                 'code'   => $request->input('code'),
             ],
@@ -49,6 +50,10 @@ class CountryExchangeController extends Controller
                 'exchange'   => $request->input('exchange'),
             ]
         );
+        CountryExchangeRecord::create([
+            'country_exchange_id'  => $record->id,
+            'exchange'             => $record->exchange,
+        ]);
         return response()->json(['success' => 'Added Successfully.']);
     }
 
@@ -59,17 +64,17 @@ class CountryExchangeController extends Controller
     }
 
     
-    public function edit(CountryExchange $country)
+    public function edit(CountryExchange $exchange_rate)
     {
         if (request()->ajax()) {
             return response()->json([
-                'result' => $country,
+                'result' => $exchange_rate,
             ]);
         }
     }
 
    
-    public function update(Request $request, CountryExchange $country)
+    public function update(Request $request, CountryExchange $exchange_rate)
     {
         date_default_timezone_set('Asia/Manila');
         $validated =  Validator::make($request->all(), [
@@ -81,18 +86,29 @@ class CountryExchangeController extends Controller
         if ($validated->fails()) {
             return response()->json(['errors' => $validated->errors()]);
         }
-        CountryExchange::find($country->id)->update(
+        CountryExchange::find($exchange_rate->id)->update(
             [
                 'country'   => $request->input('country'),
                 'code'   => $request->input('code'),
                 'exchange'   => $request->input('exchange'),
             ]
         );
+        CountryExchangeRecord::create([
+            'country_exchange_id'  => $exchange_rate->id,
+            'exchange'             => $request->input('exchange'),
+        ]);
+
         return response()->json(['success' => 'Added Successfully.']);
     }
 
-    public function destroy(CountryExchange $country)
+    public function destroy(CountryExchange $exchange_rate)
     {
-        return response()->json(['success' => $country->delete()]);
+        return response()->json(['success' => $exchange_rate->delete()]);
+    }
+
+    public function exchange_rate_records(Request $request)
+    {
+        $records = CountryExchangeRecord::where('country_exchange_id', $request->get('id'))->latest()->get();
+        return view('administration.staff.exchange_rate.exchange_rate_records' , compact('records'));
     }
 }

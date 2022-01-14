@@ -402,7 +402,7 @@
                                 <select name="payment_mode" id="payment_mode" class="form-control select2" style="width: 100%">
                                     <option value="" disabled selected>Please Select</option>
                                     <option value="Account Deposit">Account Deposit</option>
-                                    
+                                    <option value="Cash Pick Up">Cash Pick Up</option>
                                 </select>
                                 <span class="invalid-feedback" role="alert">
                                     <strong id="error-payment_mode"></strong>
@@ -422,7 +422,7 @@
                                 <select name="bank_name" id="bank_name" class="form-control select2" style="width: 100%">
                                     <option value="" disabled selected>Please Select</option>
                                     @foreach ($banks as $bank)
-                                        <option value="{{$bank->id}}"> {{$bank->bank_name}}</option>
+                                        <option value="{{$bank->id}}"> {{$bank->name}}</option>
                                     @endforeach
                                 </select>
                                 <span class="invalid-feedback" role="alert">
@@ -558,6 +558,7 @@
                         
                         
                     </div>
+                    <input type="hidden" name="beneficiary_user_id" id="beneficiary_user_id"  value="{{Auth::user()->id}}"/>
                     <input type="hidden" name="beneficiary_action" id="beneficiary_action" value="Add" />
                     <input type="hidden" name="beneficiary_hidden_id" id="beneficiary_hidden_id" />
                 </div>
@@ -593,7 +594,8 @@
                                     <h5 class="text-muted">Your account has been Successfully Registered</h5>
                                     <h5 class="text-muted">Now you can login into <span class="text-danger">{{ trans('panel.site_title') }}</span> </h5>
                                         <h5 class="text-muted"> Have a good day
-                                            <button class="btn btn-sm btn-success" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">Login Now</button> 
+                                            <a class="btn btn-sm btn-success" href="/admin/home">STAY LOGGED IN</a>
+                                            <button class="btn btn-sm btn-warning" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">LOGOUT</button> 
                                            
                                         </h5>
                                     <br>
@@ -609,7 +611,7 @@
                     </div>
             
                     <!-- Modal footer -->
-                    <div class="modal-footer bg-danger text-center">
+                    <div class="modal-footer bg-danger text-center text-white">
                             {{ trans('panel.site_title') }}
                     </div>
             
@@ -904,9 +906,6 @@ $(document).on('click', '#action_back', function(){
 $(document).on('click', '#add_beneficiary', function(){
     $('#beneficiaryModal').modal('show');
     $('#beneficiaryForm')[0].reset();
-    $('.select2').select2({
-        placeholder: 'Please Select'
-    });
     $('.form-control').removeClass('is-invalid')
     $('.modal-title').text('Add New Beneficiary');
     $('#beneficiary_action_button').val('Submit');
@@ -959,9 +958,7 @@ $('#beneficiaryForm').on('submit', function(event){
                 });
                 $('.form-control').removeClass('is-invalid');
                 $('#beneficiaryForm')[0].reset();
-                $('.select2').select2({
-                    placeholder: 'Please Select'
-                });
+               
                 $('#beneficiaryModal').modal('hide');
                 return beneficiaries();
              

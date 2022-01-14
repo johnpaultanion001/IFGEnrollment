@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             BankSeeder::class,
             PhilippineProvincesTableSeeder::class,
             PhilippineCitiesTableSeeder::class,
+          
             
         ]);
     }

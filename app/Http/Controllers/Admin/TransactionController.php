@@ -43,31 +43,92 @@ class TransactionController extends Controller
     {
         date_default_timezone_set('Asia/Manila');
         $validated =  Validator::make($request->all(), [
-            'send_amount' => ['required' ,'numeric','min:1'],
+            'send_amount' => ['required' ,'numeric','min:1000'],
             'transaction_source_of_fund' => ['required'],
         ]);
 
         if ($validated->fails()) {
             return response()->json(['errors' => $validated->errors()]);
         }
-        $userid = auth()->user()->id;
+
+        $send        = $request->input('send_amount');
+        $beneficiary = Beneficiary::where('id', $request->input('transaction_beneficiary_id'))->first();
+
+        if($send < 10001){
+            $charge = 500;  
+        }
+        elseif($send < 300001){
+            $charge = 1000;  
+        }
+        elseif($send < 1000000){
+            $charge = 1500;  
+        }
+        $total = $send + $charge;
+        $total_receive = $send * $beneficiary->country->exchange;
+
         $transaction = Transaction::create([
-            'user_id' => $userid,
-            'beneficiary_id' => $request->input('transaction_beneficiary_id'),
-            'send_amount' => $request->input('send_amount'),
-            'receive_amount' => $request->input('receive_amount'),
-            'service_charge' => $request->input('service_charge'),
-            'total' => $request->input('total'),
-            'reference_number' => 'JRF'.substr(time(), 4).$userid,
-            'transaction_payment_mode' => $request->input('transaction_payment_mode'),
-            'transaction_source_of_fund' => $request->input('transaction_source_of_fund'),
+            'user_id'                      => auth()->user()->id,
+            'beneficiary_id'               => $request->input('transaction_beneficiary_id'),
+            'country_exchange_id'          => $beneficiary->country->id,
+            'send_amount'                  => $send,
+            'receive_amount'               => $total_receive,
+            'service_charge'               => $charge,
+            'total'                        => $total,
+            'reference_number'             => 'JRF'.substr(time(), 4).auth()->user()->id,
+            'transaction_payment_mode'     => $request->input('transaction_payment_mode'),
+            'transaction_source_of_fund'   => $request->input('transaction_source_of_fund'),
             'transaction_purpose_of_remit' => $request->input('transaction_purpose_of_remit'),
+            'isConfirm'                    => 1,
         ]);
 
-        return response()->json(['transaction_form' => $transaction->id]);
+        return response()->json([
+            'success' => 'Successfully Added Transaction.',
+            'transaction_id' => $transaction->id,
+        ]);
     }
+    public function compute(Request $request){
+        date_default_timezone_set('Asia/Manila');
+        $validated =  Validator::make($request->all(), [
+            'send_amount' => ['required' ,'numeric','min:1000'],
+            'transaction_source_of_fund' => ['required'],
+        ]);
 
-  
+        if ($validated->fails()) {
+            return response()->json(['errors' => $validated->errors()]);
+        }
+        $beneficiary = Beneficiary::where('id', $request->input('transaction_beneficiary_id'))->first();
+        $send       = $request->input('send_amount');
+    
+        if($send < 10001){
+            $charge = 500;  
+        }
+        elseif($send < 300001){
+            $charge = 1000;  
+        }
+        elseif($send < 1000000){
+            $charge = 1500;  
+        }
+
+        $total = $send + $charge;
+        $total_receive = $send * $beneficiary->country->exchange;
+
+        return response()->json([
+            'submit'    =>  'submit',
+            'receive'   =>  number_format($total_receive , 0, '.', ','),
+            'send'      =>  number_format($send , 0, '.', ','),
+            'total'     =>  number_format($total , 0, '.', ','),
+            'charge'    =>  number_format($charge , 0, '.', ','),
+        ]);
+        
+    }
+    public function confirm(Request $request){
+        
+        return response()->json([
+            'confirm'    =>  'confirm',
+        ]);
+        
+    }
+   
     
     
 
@@ -123,47 +184,7 @@ class TransactionController extends Controller
 
     }
 
-    public function sendamount(Request $request)
-    {  
-        $beneciary_id = $request->get('beneficiary');
-        $beneciary = Beneficiary::findorfail($beneciary_id);
-        $send = $request->get('sendamount');
-
-        if($send < 10001){
-            $charge = 500;  
-        }
-        elseif($send < 300001){
-            $charge = 1000;  
-        }
-        elseif($send < 1000000){
-            $charge = 1500;  
-        }
-            
-
-        $total_send = $send - $charge;
-        $total_receive = $total_send * $beneciary->country->exchange;
-
-        return response()->json([
-            'receive' => $total_receive,
-            'send' => $total_send,
-            'total' => $send,
-            'charge' => $charge,
-        ]);
-    
-       
-    }
-    public function servicecharge(Request $request)
-    {  
-        $send = $request->get('sendamount');
-        $charge = $request->get('charge');
-        $total = $send + $charge;
-
-        return response()->json([
-            'total' => $total,
-        ]);
-        
-    }
-
+    //TRACKER
     public function tracker()
     {  
         return view('admin.admin.tracker.tracker');
@@ -185,7 +206,6 @@ class TransactionController extends Controller
     }
 
     //Ledger
-
     public function ledger()
     {
         return view('admin.admin.ledger.ledger');

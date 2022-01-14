@@ -20,4 +20,9 @@ class CountryExchange extends Model
         'updated_at',
         'deleted_at',
     ];
+
+    public function exchange_records()
+    {
+        return $this->hasMany(CountryExchangeRecord::class, 'country_exchange_id' , 'id')->latest();
+    }
 }

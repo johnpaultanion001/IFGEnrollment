@@ -14,13 +14,14 @@ class CreateTransactionsTable extends Migration
     public function up()
     {
         Schema::create('transactions', function (Blueprint $table) {
-            $table->id();
+            $table->id()->startingValue(1001);
             $table->string('user_id');
+            $table->string('country_exchange_id')->nullable();
             $table->string('beneficiary_id');
-            $table->float('send_amount', 8, 2);
-            $table->float('receive_amount', 8, 2);
-            $table->float('service_charge', 8, 2);
-            $table->float('total', 8, 2);
+            $table->float('send_amount');
+            $table->float('receive_amount');
+            $table->float('service_charge');
+            $table->float('total');
             $table->string('reference_number');
             $table->string('transaction_payment_mode');
             $table->string('transaction_purpose_of_remit');

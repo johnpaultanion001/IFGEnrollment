@@ -2,22 +2,25 @@
 
 use App\Models\User;
 use App\Models\CountryExchange;
+use App\Models\CountryExchangeRecord;
+use App\Models\Beneficiary;
+use App\Models\Transaction;
 use Illuminate\Database\Seeder;
+
 
 
 class UsersTableSeeder extends Seeder
 {
     public function run()
     {
-        $faker = Faker\Factory::create();
         $users = [
             [
-                'id'             => 1,
+                'id'             => '1',
                 'email'          => 'admin@admin.com',
                 'password'       => '$2y$10$vUIzDlvfpu2yOATsPYcPaOTY/zgbgwViLIWSfZxSlmRBFV.g/fmOW',
-                'firstname'      => 'JohnpaulAdmin',
-                'middlename'      => 'Valdez',
-                'lastname'      => 'TanionAdmin',
+                'firstname'      => 'Test',
+                'middlename'      => 'V',
+                'lastname'      => 'Admin',
                 'date_of_birth' => '2000-02-21',
                 'occupation' => 'test',
                 'id_type' => 'test',
@@ -36,18 +39,18 @@ class UsersTableSeeder extends Seeder
                 'telephone' => '11111',
                 'terms_and_conditions' => 1,
                 'isRegistered' => 1,
-                'email_verified_at' => '2021-09-27 19:00:22',
-                'created_at' => '2021-09-27 18:59:31',
-                'updated_at' => '2021-09-27 19:07:34',
+                'email_verified_at' => date("Y-m-d H:i:s"),
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
                 'remember_token' => null,
             ],
             [
-                'id'             => 2,
+                'id'             => '3',
                 'email'          => 'user@user.com',
                 'password'       => '$2y$10$vUIzDlvfpu2yOATsPYcPaOTY/zgbgwViLIWSfZxSlmRBFV.g/fmOW',
-                'firstname'      => 'Johnpaul',
-                'middlename'      => 'Valdez',
-                'lastname'      => 'Tanion',
+                'firstname'      => 'Test1',
+                'middlename'      => 'V',
+                'lastname'      => 'User',
                 'date_of_birth' => '2000-02-21',
                 'occupation' => 'test',
                 'id_type' => 'test',
@@ -66,28 +69,343 @@ class UsersTableSeeder extends Seeder
                 'telephone' => '11111',
                 'terms_and_conditions' => 1,
                 'isRegistered' => 1,
-                'email_verified_at' => '2021-09-27 19:00:22',
-                'created_at' => '2021-09-27 18:59:31',
-                'updated_at' => '2021-09-27 19:07:34',
+                'email_verified_at' => date("Y-m-d H:i:s"),
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
+                'remember_token' => null,
+            ],
+            [
+                'id'             => '4',
+                'email'          => 'user1@user1.com',
+                'password'       => '$2y$10$vUIzDlvfpu2yOATsPYcPaOTY/zgbgwViLIWSfZxSlmRBFV.g/fmOW',
+                'firstname'      => 'Test2',
+                'middlename'      => 'V',
+                'lastname'      => 'User',
+                'date_of_birth' => '2000-02-21',
+                'occupation' => 'test',
+                'id_type' => 'test',
+                'id_number' => '11111',
+                'id_issued_country' => 'test',
+                'id_issue_date' => '2020-02-21',
+                'id_expiry_date' => '2025-02-02',
+                'gender' => 'Male',
+                'source_of_fund' => 'test1',
+                'id_card_front' => 'test1',
+                'id_card_back' => 'test1',
+                'nationality' => 'test1',
+                'country' => 'test1',
+                'address' => 'test1',
+                'mobile_number' => '11111',
+                'telephone' => '11111',
+                'terms_and_conditions' => 1,
+                'isRegistered' => 1,
+                'email_verified_at' => date("Y-m-d H:i:s"),
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
                 'remember_token' => null,
             ],
             
         ];
+        
+        $staff = [
+            [
+                'id'                    => '2',
+                'email'                 => 'staff@staff.com',
+                'password'              => '$2y$10$vUIzDlvfpu2yOATsPYcPaOTY/zgbgwViLIWSfZxSlmRBFV.g/fmOW',
+                'firstname'             => 'Test',
+                'lastname'              => 'Staff',
+                'isRegistered'          => 1,
+                'email_verified_at'     => date("Y-m-d H:i:s"),
+                'created_at'            => date("Y-m-d H:i:s"),
+                'updated_at'            => date("Y-m-d H:i:s"),
+                'remember_token'        => null,
+            ],
+        ];
+
         $ce = [
             [
-                'id'             => 1,
-                'country'             => 'Philippines',
-                'code'             => 'PHP',
-                'exchange'             => 0.46,
-                'created_at' => '2021-09-27 18:59:31',
-                'updated_at' => '2021-09-27 19:07:34',
-                
+                'country'           => 'Philippines',
+                'code'              => 'PHP',
+                'exchange'          => 0.44,
+                'created_at'        => date("Y-m-d H:i:s"),
+                'updated_at'        => date("Y-m-d H:i:s"),
             ],
-            
-            
+            [
+                'country'           => 'Australia',
+                'code'              => 'UAD',
+                'exchange'          =>  0.0087,
+                'created_at'        => date("Y-m-d H:i:s"),
+                'updated_at'        => date("Y-m-d H:i:s"),
+            ],
+            [
+                'country'           => 'Bangladesh',
+                'code'              => 'BDT',
+                'exchange'          =>  0.75,
+                'created_at'        => date("Y-m-d H:i:s"),
+                'updated_at'        => date("Y-m-d H:i:s"),
+            ],
+            [
+                'country'           => 'China',
+                'code'              => 'CNY',
+                'exchange'          =>  0.055,
+                'created_at'        => date("Y-m-d H:i:s"),
+                'updated_at'        => date("Y-m-d H:i:s"),
+            ],
+            [
+                'country'           => 'India',
+                'code'              => 'INR',
+                'exchange'          =>  0.65,
+                'created_at'        => date("Y-m-d H:i:s"),
+                'updated_at'        => date("Y-m-d H:i:s"),
+            ],
+            [
+                'country'           => 'U.A.E',
+                'code'              => 'AED',
+                'exchange'          =>  0.032,
+                'created_at'        => date("Y-m-d H:i:s"),
+                'updated_at'        => date("Y-m-d H:i:s"),
+            ],
+            [
+                'country'           => 'QATAR',
+                'code'              => 'QTR',
+                'exchange'          =>  0.032,
+                'created_at'        => date("Y-m-d H:i:s"),
+                'updated_at'        => date("Y-m-d H:i:s"),
+            ],
+            [
+                'country'           => 'Sri Lankan',
+                'code'              => 'QTR',
+                'exchange'          =>  1.76,
+                'created_at'        => date("Y-m-d H:i:s"),
+                'updated_at'        => date("Y-m-d H:i:s"),
+            ],
+            [
+                'country'           => 'U.S.A',
+                'code'              => 'USD',
+                'exchange'          =>  0.0087,
+                'created_at'        => date("Y-m-d H:i:s"),
+                'updated_at'        => date("Y-m-d H:i:s"),
+            ],
+            [
+                'country'           => 'Malaysia',
+                'code'              => 'MYR',
+                'exchange'          =>  0.036,
+                'created_at'        => date("Y-m-d H:i:s"),
+                'updated_at'        => date("Y-m-d H:i:s"),
+            ],
         ];
-        User::insert($users);
-        CountryExchange::insert($ce);
+        $ce_record = [
+            [
+                'country_exchange_id'       => 1,
+                'exchange'                  => 0.44,
+                'created_at'                => date("Y-m-d H:i:s"),
+                'updated_at'                => date("Y-m-d H:i:s"),
+            ],
+            [
+                'country_exchange_id'       => 2,
+                'exchange'                  =>  0.0087,
+                'created_at'                => date("Y-m-d H:i:s"),
+                'updated_at'                => date("Y-m-d H:i:s"),
+            ],
+            [
+                'country_exchange_id'       => 3,
+                'exchange'                  =>  0.75,
+                'created_at'                => date("Y-m-d H:i:s"),
+                'updated_at'                => date("Y-m-d H:i:s"),
+            ],
+            [
+                'country_exchange_id'       => 4,
+                'exchange'                  =>  0.055,
+                'created_at'                => date("Y-m-d H:i:s"),
+                'updated_at'                => date("Y-m-d H:i:s"),
+            ],
+            [
+                'country_exchange_id'       => 5,
+                'exchange'                  =>  0.65,
+                'created_at'                => date("Y-m-d H:i:s"),
+                'updated_at'                => date("Y-m-d H:i:s"),
+            ],
+            [
+                'country_exchange_id'       => 6,
+                'exchange'                  =>  0.032,
+                'created_at'                => date("Y-m-d H:i:s"),
+                'updated_at'                => date("Y-m-d H:i:s"),
+            ],
+            [
+                'country_exchange_id'       => 7,
+                'exchange'          =>  0.032,
+                'created_at'        => date("Y-m-d H:i:s"),
+                'updated_at'        => date("Y-m-d H:i:s"),
+            ],
+            [
+                'country_exchange_id'       => 8,
+                'exchange'                  =>  1.76,
+                'created_at'                => date("Y-m-d H:i:s"),
+                'updated_at'                => date("Y-m-d H:i:s"),
+            ],
+            [
+                'country_exchange_id'       => 9,
+                'exchange'                  =>  0.0087,
+                'created_at'                => date("Y-m-d H:i:s"),
+                'updated_at'                => date("Y-m-d H:i:s"),
+            ],
+            [
+                'country_exchange_id'       => 10,
+                'exchange'                  =>  0.036,
+                'created_at'                => date("Y-m-d H:i:s"),
+                'updated_at'                => date("Y-m-d H:i:s"),
+            ],
+        ];
 
+        $benificiaries = [
+            [
+                'user_id'                   => 3,
+                'receipt_country'           => 1,
+                'payment_mode'              => 'Cash Pick Up',
+                'bank_name'                 => 1,
+                'account_number'            => '11111',
+                'beneficiary_firstname'     => 'Test1',
+                'beneficiary_middlename'    => 'V',
+                'beneficiary_lastname'      => 'Benificiary',
+                'mobile_number'             => '11111111',
+                'address'                   => 'Antipolo City',
+                'purpose_of_remit'          => 'Donation',
+                'relation_with_beneficiary' => 'Aunt',
+                'created_at'                => date("Y-m-d H:i:s"),
+                'updated_at'                => date("Y-m-d H:i:s"),
+            ],
+            [
+                'user_id'                   => 3,
+                'receipt_country'           => 1,
+                'payment_mode'              => 'Account Deposit',
+                'bank_name'                 => 1,
+                'account_number'            => '11111',
+                'beneficiary_firstname'     => 'Test2',
+                'beneficiary_middlename'    => 'V',
+                'beneficiary_lastname'      => 'Benificiary',
+                'mobile_number'             => '11111111',
+                'address'                   => 'Antipolo City',
+                'purpose_of_remit'          => 'Donation',
+                'relation_with_beneficiary' => 'Brother',
+                'created_at'                => date("Y-m-d H:i:s"),
+                'updated_at'                => date("Y-m-d H:i:s"),
+            ],
+            [
+                'user_id'                   => 4,
+                'receipt_country'           => 1,
+                'payment_mode'              => 'Cash Pick Up',
+                'bank_name'                 => 1,
+                'account_number'            => '11111',
+                'beneficiary_firstname'     => 'Test3',
+                'beneficiary_middlename'    => 'V',
+                'beneficiary_lastname'      => 'Benificiary',
+                'mobile_number'             => '11111111',
+                'address'                   => 'Antipolo City',
+                'purpose_of_remit'          => 'Donation',
+                'relation_with_beneficiary' => 'Aunt',
+                'created_at'                => date("Y-m-d H:i:s"),
+                'updated_at'                => date("Y-m-d H:i:s"),
+            ],
+            [
+                'user_id'                   => 4,
+                'receipt_country'           => 1,
+                'payment_mode'              => 'Account Deposit',
+                'bank_name'                 => 1,
+                'account_number'            => '11111',
+                'beneficiary_firstname'     => 'Test4',
+                'beneficiary_middlename'    => 'V',
+                'beneficiary_lastname'      => 'Benificiary',
+                'mobile_number'             => '11111111',
+                'address'                   => 'Antipolo City',
+                'purpose_of_remit'          => 'Donation',
+                'relation_with_beneficiary' => 'Brother',
+                'created_at'                => date("Y-m-d H:i:s"),
+                'updated_at'                => date("Y-m-d H:i:s"),
+            ],
+        ];
+
+        $transactions = [
+            [
+                'user_id'                       => 3,
+                'country_exchange_id'           => 1,
+                'beneficiary_id'                => 1,
+                'send_amount'                   => 1500,
+                'receive_amount'                => 660,
+                'service_charge'                => 500,
+                'total'                         => 2000,
+                'reference_number'              => 'JRF6192133',
+                'transaction_payment_mode'      => 'Cash Pick Up',
+                'transaction_purpose_of_remit'  => 'Donation',
+                'transaction_source_of_fund'    => 'Business Income',
+                'isConfirm'                     => 1,
+                'status'                        => 0,
+                'isPaid'                        => 0,
+                'created_at'                    => '2022-01-11 03:47:51',
+                'updated_at'                    => date("Y-m-d H:i:s"),
+            ],
+            [
+                'user_id'                       => 3,
+                'country_exchange_id'           => 1,
+                'beneficiary_id'                => 2,
+                'send_amount'                   => 3000,
+                'receive_amount'                => 1320,
+                'service_charge'                => 500,
+                'total'                         => 3500,
+                'reference_number'              => 'JRF6192134',
+                'transaction_payment_mode'      => 'Account Deposit',
+                'transaction_purpose_of_remit'  => 'Donation',
+                'transaction_source_of_fund'    => 'Business Income',
+                'isConfirm'                     => 1,
+                'status'                        => 0,
+                'isPaid'                        => 0,
+                'created_at'                    => '2022-01-12 03:47:51',
+                'updated_at'                    => date("Y-m-d H:i:s"),
+            ],
+            [
+                'user_id'                       => 4,
+                'country_exchange_id'           => 1,
+                'beneficiary_id'                => 3,
+                'send_amount'                   => 1500,
+                'receive_amount'                => 660,
+                'service_charge'                => 500,
+                'total'                         => 2000,
+                'reference_number'              => 'JRF6192333',
+                'transaction_payment_mode'      => 'Cash Pick Up',
+                'transaction_purpose_of_remit'  => 'Donation',
+                'transaction_source_of_fund'    => 'Business Income',
+                'isConfirm'                     => 1,
+                'status'                        => 0,
+                'isPaid'                        => 0,
+                'created_at'                    => '2022-01-13 03:47:51',
+                'updated_at'                    => date("Y-m-d H:i:s"),
+            ],
+            [
+                'user_id'                       => 4,
+                'country_exchange_id'           => 1,
+                'beneficiary_id'                => 4,
+                'send_amount'                   => 3000,
+                'receive_amount'                => 1320,
+                'service_charge'                => 500,
+                'total'                         => 3500,
+                'reference_number'              => 'JRF6192434',
+                'transaction_payment_mode'      => 'Account Deposit',
+                'transaction_purpose_of_remit'  => 'Donation',
+                'transaction_source_of_fund'    => 'Business Income',
+                'isConfirm'                     => 1,
+                'status'                        => 0,
+                'isPaid'                        => 0,
+                'created_at'                    => '2022-01-14 03:47:51',
+                'updated_at'                    => date("Y-m-d H:i:s"),
+            ],
+        ];
+
+        
+
+        User::insert($users);
+        User::insert($staff);
+        CountryExchange::insert($ce);
+        Beneficiary::insert($benificiaries);
+        Transaction::insert($transactions);
+        CountryExchangeRecord::insert($ce_record);
     }
 }

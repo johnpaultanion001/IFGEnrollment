@@ -31,6 +31,7 @@
                     </div>
                     <div class="form-group pt-1">
                       <input type="password" id="password" name="password" class="classic-input form-control font-weight-bold {{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="Password">
+                      <span toggle="#password-field" class="fa fa-fw fa-eye field_icon toggle-password" style="float: right; margin-right: 10px; margin-top: -25px; position: relative; z-index: 2;"></span>
                       @if($errors->has('password'))
                           <div class="invalid-feedback color-red">
                               {{ $errors->first('password') }}
@@ -65,7 +66,15 @@
 @section('scripts')
 <script>
 
-
+$("body").on('click', '.toggle-password', function() {
+    $(this).toggleClass("fa-eye fa-eye-slash");
+    var input = $("#password");
+    if (input.attr("type") === "password") {
+    input.attr("type", "text");
+    } else {
+    input.attr("type", "password");
+    }
+});
 
 </script>
 @endsection

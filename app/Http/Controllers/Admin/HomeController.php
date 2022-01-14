@@ -21,7 +21,7 @@ class HomeController
     {
         $userid = auth()->user()->id;
         $countries = CountryExchange::latest()->get();
-        $banks = Bank::where('status', 'BANK')->latest()->get();
+        $banks = Bank::latest()->get();
 
         $last_amount_transfer = Transaction::where('user_id' ,$userid)->where('isConfirm' , 1)->latest()->first(); 
         $total_transfer = Transaction::where('user_id' ,$userid)->where('isConfirm' , 1)->sum('send_amount');
@@ -65,7 +65,7 @@ class HomeController
     }
     public function fullregistration(){
         $countries = CountryExchange::latest()->get();
-        $banks = Bank::where('status', 'BANK')->latest()->get();
+        $banks = Bank::latest()->get();
         return view('auth.fullregistration' , compact('countries','banks'));
     }
 

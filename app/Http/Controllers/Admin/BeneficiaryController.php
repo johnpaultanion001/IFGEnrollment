@@ -46,9 +46,9 @@ class BeneficiaryController extends Controller
         if ($validated->fails()) {
             return response()->json(['errors' => $validated->errors()]);
         }
-        $userid = auth()->user()->id;
+        
         Beneficiary::create([
-            'user_id' => $userid,
+            'user_id' => $request->input('beneficiary_user_id'),
             'receipt_country' => $request->input('receipt_country'),
             'payment_mode' => $request->input('payment_mode'),
              //Payout Location

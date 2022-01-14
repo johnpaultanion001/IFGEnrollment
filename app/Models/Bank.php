@@ -11,12 +11,14 @@ class Bank extends Model
     use SoftDeletes , HasFactory;
 
     protected $fillable = [
-        'bank_name',
-        'province_code',
-        'city_municipality_code',
+        'name',
+        'display_name',
         'address',
         'status',
-
+        'province_code',
+        'city_municipality_code',
+        'lat',
+        'lng',
         'created_at',
         'updated_at',
         'deleted_at',

@@ -12,6 +12,7 @@ class Transaction extends Model
 
     protected $fillable = [
         'user_id',
+        'country_exchange_id',
         'beneficiary_id',
         'send_amount',
         'receive_amount',
@@ -37,5 +38,9 @@ class Transaction extends Model
     public function beneficiary()
     {
         return $this->belongsTo(Beneficiary::class, 'beneficiary_id');
+    }
+    public function country()
+    {
+        return $this->belongsTo(CountryExchange::class, 'country_exchange_id');
     }
 }

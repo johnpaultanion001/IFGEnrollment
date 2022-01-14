@@ -16,10 +16,10 @@
                 <thead>
                     <tr>
                         <th>
-                            S N
+                            Transaction ID
                         </th>
                         <th>
-                            Date
+                            Date Time
                         </th>
                         <th>
                             Reference #
@@ -35,6 +35,9 @@
                         </th>
                         <th>
                             Status
+                        </th>
+                        <th>
+                            Payment
                         </th>
                     </tr>
                 </thead>
@@ -56,7 +59,7 @@
                             <td>
                                 {{  number_format($history->receive_amount , 0, ',', ',') }}
                                 <hr class="my-1 bg-muted">
-                                {{ $history->beneficiary->bank->bank_name ?? '' }}
+                                {{ $history->beneficiary->bank->name ?? '' }}
 
                             </td>
                             <td>
@@ -72,7 +75,13 @@
                                 @elseif($history->status == 2)
                                     <span class="badge badge-primary">Claimed</span>
                                 @endif
-
+                            </td>
+                            <td>
+                                @if($history->isPaid == false)
+                                    <span class="badge badge-danger">UNPAID</span>
+                                @elseif($history->isPaid == true)
+                                    <span class="badge badge-success">PAID</span>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

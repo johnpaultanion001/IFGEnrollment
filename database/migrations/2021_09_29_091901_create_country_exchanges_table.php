@@ -17,7 +17,7 @@ class CreateCountryExchangesTable extends Migration
             $table->id();
             $table->string('country');
             $table->string('code');
-            $table->float('exchange', 8, 2);
+            $table->double('exchange');
             $table->timestamps();
             $table->softDeletes();
         });

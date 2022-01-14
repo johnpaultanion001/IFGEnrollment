@@ -56,7 +56,7 @@
         max-height: 300px;
       }
       .pac-container { z-index: 100000 !important; }
-
+     
      
   </style>
   @yield('styles')
@@ -76,6 +76,7 @@
       {{ csrf_field() }}
   </form>
 
+  
 
   <!--   Core JS Files   -->
  
@@ -98,12 +99,8 @@
   <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
  
   <script src="{{ asset('/assets_admin/js/now-ui-kit.js?v=1.3.0') }}" type="text/javascript"></script>
-  <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
-        {{ csrf_field() }}
- </form>
-
- <script>
-        $(document).ready(function () {
+  <script>
+         $(document).ready(function () {
             $('.select2').select2()
             $('.treeview').each(function () {
             var shouldExpand = false
@@ -117,8 +114,12 @@
                 }
             })
 
+            
         });
+       
     </script>
+
+
     <!-- jquery script -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
@@ -135,14 +136,17 @@
         <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
         <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
 
+
+
+    
     <script>
         $(function() {
             let copyButtonTrans = 'COPY'
-            let csvButtonTrans = 'CSV'
+            let csvButtonTrans = 'EXCEL'
             let excelButtonTrans = 'EXCEL'
             let pdfButtonTrans = 'PDF'
             let printButtonTrans = 'PRINT'
-            let colvisButtonTrans = 'COLVIS'
+            let colvisButtonTrans = 'VIEW'
 
             let languages = {
             'en': 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/English.json'
@@ -215,7 +219,10 @@
             $.fn.dataTable.ext.classes.sPageButton = '';
         });
     </script>
+    
+    
     @yield('scripts')
+    
 </body>
 
 </html>

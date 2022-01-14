@@ -58,7 +58,7 @@
                                 {{ $beneficiary->payment_mode ?? '' }}
                             </td>
                             <td>
-                                {{ $beneficiary->bank->bank_name ?? '' }}
+                                {{ $beneficiary->bank->name ?? '' }}
                             </td>
                             <td>
                                 {{ $beneficiary->account_number ?? '' }}

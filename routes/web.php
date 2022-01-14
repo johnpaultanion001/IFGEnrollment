@@ -2,23 +2,31 @@
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\BranchLocatorController;
 use App\Http\Controllers\Admin\ContactUsController;
+use App\Http\Controllers\Admin\CalculatorController;
 
 
 Route::redirect('/', '/admin/home');
+
 
 // Tracker
 Route::get('/tracker', [TransactionController::class, 'tracker'])->name('tracker.tracker');
 Route::post('/gettracker', [TransactionController::class, 'tracker_show'])->name('tracker.gettracker');
 
 // Branch Locator
-Route::get('/branch_locator', [BranchLocatorController::class, 'branch_locator'])->name('branch_locator.branch_locator');
-Route::post('/branch_locator/cities_province', [BranchLocatorController::class, 'cities_province'])->name('branch_locator.cities_province');
-Route::post('/branch_locator/cities_province_banks', [BranchLocatorController::class, 'cities_province_banks'])->name('branch_locator.cities_province_banks');
+Route::get('/branch_locator/{status}', [BranchLocatorController::class, 'branch_locator'])->name('branch_locator.branch_locator');
+Route::get('/branch_locator/province/province', [BranchLocatorController::class, 'province'])->name('branch_locator.province');
+Route::get('/branch_locator/city/city', [BranchLocatorController::class, 'city'])->name('branch_locator.city');
+Route::get('/branch_locator/address/address', [BranchLocatorController::class, 'address'])->name('branch_locator.address');
 
 // Contact us 
 Route::get('/contactus', [ContactUsController::class, 'index'])->name('contactus.contactus');
 Route::post('/contactus', [ContactUsController::class, 'store'])->name('contactus.store');
 
+// Calculator
+Route::get('/calculator', [CalculatorController::class, 'index'])->name('calculator.calculator');
+Route::get('/calculator/delivery', [CalculatorController::class, 'delivery'])->name('calculator.delivery');
+Route::get('/calculator/country', [CalculatorController::class, 'country'])->name('calculator.country');
+Route::get('/calculator/amount', [CalculatorController::class, 'amount'])->name('calculator.amount');
 
 Auth::routes(['verify' => true]);
 
@@ -37,28 +45,52 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('/listbeneficiaries', 'HomeController@listbeneficiaries')->name('listbeneficiaries');  
     Route::post('exchangerate', 'HomeController@exchangerate')->name('home.exchangerate');
 
-    // Permissions
-    Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');
-    Route::resource('permissions', 'PermissionsController');
-
-    // Roles
-    Route::delete('roles/destroy', 'RolesController@massDestroy')->name('roles.massDestroy');
-    Route::resource('roles', 'RolesController');
-
-    // Users
-    Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
-    Route::resource('users', 'UsersController');
 
     // Transactions 
     Route::get('history', 'TransactionController@index')->name('transactions.history');
     Route::get('history/load', 'TransactionController@loadhistory')->name('transactions.loadhistory');
     Route::post('reviewpayment', 'TransactionController@reviewpayment')->name('reviewpayment');
-    Route::post('sendamount', 'TransactionController@sendamount')->name('sendamount');  
     Route::post('servicecharge', 'TransactionController@servicecharge')->name('servicecharge');  
-    Route::post('transactions', 'TransactionController@store')->name('transactions.store');
+    
     Route::put('transactions/{transaction}', 'TransactionController@update')->name('transactions.update');
     Route::put('transactions/{transaction}/confirmtransaction', 'TransactionController@confirmtransaction')->name('transactions.confirmtransaction');
     Route::post('transactions/show', 'TransactionController@show')->name('transactions.show');    
+    Route::get('transactions/compute', 'TransactionController@compute')->name('transactions.compute');
+    Route::get('transactions/confirm', 'TransactionController@confirm')->name('transactions.confirm');
+    Route::post('transactions', 'TransactionController@store')->name('transactions.store');
+    
+
+    // Transactions For Staff
+    Route::get('transaction', 'TransactionStaffController@index')->name('transaction_staff.index');
+    Route::get('transaction/sender', 'TransactionStaffController@sender')->name('transaction_staff.sender');
+    Route::get('transaction/beneficiary', 'TransactionStaffController@beneficiary')->name('transaction_staff.beneficiary');
+    Route::get('transaction/reviewpayment', 'TransactionStaffController@reviewpayment')->name('transaction_staff.reviewpayment');
+    Route::get('transaction/compute', 'TransactionStaffController@compute')->name('transaction_staff.compute');
+    Route::post('transaction/transaction_store', 'TransactionStaffController@transaction_store')->name('transaction_staff.transaction_store');
+    Route::get('transaction/beneficiary_dd', 'TransactionStaffController@beneficiary_dd')->name('transaction_staff.beneficiary_dd');
+    Route::get('transaction/transaction_details', 'TransactionStaffController@transaction_details')->name('transaction_staff.transaction_details');
+    Route::delete('transaction/transaction_cancel/{transaction}', 'TransactionStaffController@transaction_cancel')->name('transaction_staff.transaction_cancel');
+
+
+    // Customer Staff
+    Route::get('customer', 'CustomerStaffController@index')->name('customer_staff.index');
+    Route::get('customer/customer_detail', 'CustomerStaffController@customer_detail')->name('customer_staff.customer_detail');
+    Route::get('customer/beneficiaries', 'CustomerStaffController@beneficiaries')->name('customer_staff.beneficiaries');
+    Route::get('customer/transactions', 'CustomerStaffController@transactions')->name('customer_staff.transactions');
+
+    // Find Transaction
+    Route::get('find_transaction', 'FindTransactionStaffController@index')->name('find_transaction_staff.index');
+    Route::get('find_transaction/transaction', 'FindTransactionStaffController@find_transaction')->name('find_transaction_staff.find_transaction');
+    
+    // Transaction Report
+    Route::get('transaction_summary_report', 'TransactionSummaryReportController@transaction_summary_report')->name('transaction_report_staff.transaction_summary_report');
+    Route::get('transaction_summary_report/load', 'TransactionSummaryReportController@transaction_summary_report_load')->name('transaction_report_staff.transaction_summary_report_load');
+    Route::get('transaction_summary_report/filter', 'TransactionSummaryReportController@transaction_summary_report_filter')->name('transaction_report_staff.transaction_summary_report_filter');
+
+    // Exchange Rate
+    Route::resource('exchange_rate', 'CountryExchangeController');
+    Route::get('exchange_rate/exchange_rate_records/exchange_rate_records', 'CountryExchangeController@exchange_rate_records')->name('exchange_rate.exchange_rate_records');
+
 
 
     //ledger
@@ -70,13 +102,31 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('recipient/load', 'BeneficiaryController@loadrecipient')->name('recipient.loadrecipient');
     
     //Admin
+    Route::get('/accounts', 'UsersController@index')->name('accounts.index');
+    Route::get('/accounts/{account}/edit', 'UsersController@edit')->name('accounts.edit');
+    Route::post('/accounts', 'UsersController@store')->name('accounts.store');
+    Route::put('/accounts/{account}', 'UsersController@update')->name('accounts.update');
+    Route::delete('/accounts/{account}', 'UsersController@destroy')->name('accounts.destroy');
+
+    //Change Password
+    Route::get('/change_password', 'UsersController@changepassword')->name('accounts.changepassword');
+    Route::put('/change_password/{user}', 'UsersController@passwordupdate')->name('accounts.passwordupdate');
+
+
     Route::get('/0/home', 'AdminController@index')->name('admin.index');
     Route::put('/0/home/trasaction/status', 'AdminController@status')->name('transation.status');
     Route::put('/0/home/trasaction/payment', 'AdminController@payment')->name('transation.payment');
     
     //Country Receipt
-    Route::resource('countries', 'CountryExchangeController');
-    Route::resource('banks', 'BankController');
+    //Route::resource('countries', 'CountryExchangeController');
+    Route::get('/branch_bank_setting', 'BankController@index')->name('branch_bank_setting.branch_bank_setting');
+    Route::post('/branch_bank_setting', 'BankController@store')->name('branch_bank_setting.store');
+    Route::get('/branch_bank_setting/{bank}/edit', 'BankController@edit')->name('branch_bank_setting.edit');
+    Route::put('/branch_bank_setting/{bank}', 'BankController@update')->name('branch_bank_setting.update');
+    Route::delete('/branch_bank_setting/{bank}', 'BankController@destroy')->name('branch_bank_setting.destroy');
+
+
+
     
 });
 

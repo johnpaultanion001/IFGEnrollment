@@ -19,21 +19,41 @@
                           <p>Home</p>
                         </a>
                       </li>
-                      <li class="nav-item">
-                        <a class="nav-link {{ request()->is('admin/recipient') || request()->is('admin/recipient/*') ? 'active' : '' }}" href="/admin/recipient">
-                          <p>Recipient</p>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link {{ request()->is('admin/history') || request()->is('admin/history/*') ? 'active' : '' }}" href="/admin/history">
-                          <p>History</p>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link {{ request()->is('admin/ledger') || request()->is('admin/ledger/*') ? 'active' : '' }}" href="/admin/ledger">
-                          <p>Ledger</p>
-                        </a>
-                      </li>
+                      @can('user_access')
+                        <li class="nav-item">
+                          <a class="nav-link {{ request()->is('admin/recipient') || request()->is('admin/recipient/*') ? 'active' : '' }}" href="/admin/recipient">
+                            <p>Recipient</p>
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link {{ request()->is('admin/history') || request()->is('admin/history/*') ? 'active' : '' }}" href="/admin/history">
+                            <p>History</p>
+                          </a>
+                        </li>
+                        <!-- <li class="nav-item">
+                          <a class="nav-link {{ request()->is('admin/ledger') || request()->is('admin/ledger/*') ? 'active' : '' }}" href="/admin/ledger">
+                            <p>Ledger</p>
+                          </a>
+                        </li> -->
+                      @endcan
+                      @can('staff_access')
+                        <li class="nav-item">
+                          <a class="nav-link {{ request()->is('admin/transaction') || request()->is('admin/transaction/*') ? 'active' : '' }}" href="/admin/transaction">
+                            <p>Transaction</p>
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link {{ request()->is('admin/exchange_rate') || request()->is('admin/exchange_rate/*') ? 'active' : '' }}" href="/admin/exchange_rate">
+                            <p>Exchange Rate</p>
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link {{ request()->is('admin/customer') || request()->is('admin/customer/*') ? 'active' : '' }}" href="/admin/customer">
+                            <p>Customer</p>
+                          </a>
+                        </li>
+                      @endcan
+                    
                     @else
                       <li class="nav-item">
                         <a class="nav-link {{ request()->is('login') || request()->is('login/*') ? 'active' : '' }}" href="/login">
@@ -47,12 +67,17 @@
                       </li>
                     @endif
                       <li class="nav-item">
+                        <a class="nav-link {{ request()->is('calculator') || request()->is('calculator/*') ? 'active' : '' }}" href="/calculator">
+                          <p>Calculator</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
                         <a class="nav-link {{ request()->is('tracker') || request()->is('tracker/*') ? 'active' : '' }}" href="/tracker">
                           <p>Tracker</p>
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link {{ request()->is('branch_locator') || request()->is('branch_locator/*') ? 'active' : '' }}" href="/branch_locator">
+                        <a class="nav-link {{ request()->is('branch_locator') || request()->is('branch_locator/*') ? 'active' : '' }}" href="/branch_locator/BANK">
                           <p>Branch Locatior</p>
                         </a>
                       </li>
@@ -67,11 +92,14 @@
                             <i class="now-ui-icons ui-1_settings-gear-63" aria-hidden="true"></i>
                           </a>
                           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                          @if (Auth::user()->roles()->pluck('id')->implode(', ') == 1)
+                           <a class="dropdown-item" href="/admin/accounts">Accounts</a>
+                           <a class="dropdown-item" href="/admin/branch_bank_setting">Branch / Bank Setting</a>
+                          @elseif (Auth::user()->roles()->pluck('id')->implode(', ') == 3)
                             <a class="dropdown-item" href="/admin/fullregistration">My Account</a>
+                          @endif
+                            <a class="dropdown-item" href="/admin/change_password">Change Password?</a>
                             <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">Logout</a>
-                            @can('admin_access')
-                              <a class="dropdown-item" href="/admin/0/home">Administration</a>
-                            @endcan
                           </div>
                         </li>
                       @endif

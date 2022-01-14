@@ -3,84 +3,135 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\MassDestroyUserRequest;
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\UpdateUserRequest;
-use App\Models\Role;
+use App\Models\RoleUser;
 use App\Models\User;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Validator;
+use Illuminate\Support\Facades\Hash;
+use App\Rules\MatchOldPassword;
 
 class UsersController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('admin_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $users = User::all();
+        $accounts = RoleUser::whereIn('role_id',['1','2'])->get();
 
-        return view('admin.users.index', compact('users'));
+        return view('administration.accounts.accounts', compact('accounts'));
     }
 
     public function create()
     {
-        abort_if(Gate::denies('user_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $roles = Role::all()->pluck('title', 'id');
-
-        return view('admin.users.create', compact('roles'));
+        
     }
 
-    public function store(StoreUserRequest $request)
+    public function store(Request $request)
     {
-        $user = User::create($request->all());
-        $user->roles()->sync($request->input('roles', []));
+        date_default_timezone_set('Asia/Manila');
+        $validated =  Validator::make($request->all(), [
+            'firstname'             => ['required'],
+            'lastname'              => ['required'],
+            'email'                 => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'mobile_number'         => ['required'],
+            'password'              => ['required', 'string', 'min:8'],
+            'role'                  => ['required'],
+        
+        ]);
+        if ($validated->fails()) {
+            return response()->json(['errors' => $validated->errors()]);
+        }
+        $account = User::create([
+            'firstname'  => $request->input('firstname'),
+            'lastname'  => $request->input('lastname'),
+            'email'  => $request->input('email'),
+            'mobile_number'  => $request->input('mobile_number'),
+            'password' => Hash::make($request->input('password')),
+            'isRegistered'          => 1,
+            'email_verified_at'     => date("Y-m-d H:i:s"),
+        ]);
+        RoleUser::insert([
+            'user_id' => $account->id,
+            'role_id' => $request->input('role'),
+        ]);
+        return response()->json(['success' => 'Added Successfully.']);
 
-        return redirect()->route('admin.users.index');
     }
 
-    public function edit(User $user)
+    public function edit(User $account)
     {
-        abort_if(Gate::denies('user_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $role = RoleUser::where('user_id', $account->id)->first();
 
-        $roles = Role::all()->pluck('title', 'id');
-
-        $user->load('roles');
-
-        return view('admin.users.edit', compact('roles', 'user'));
+        if (request()->ajax()) {
+            return response()->json([
+                'firstname'          => $account->firstname,
+                'lastname'           => $account->lastname,
+                'email'              => $account->email,
+                'mobile_number'      => $account->mobile_number,
+                'role'               => $role->role_id,
+            ]);
+        }
     }
 
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(Request $request, User $account)
     {
-        $user->update($request->all());
-        $user->roles()->sync($request->input('roles', []));
+        date_default_timezone_set('Asia/Manila');
+        $validated =  Validator::make($request->all(), [
+            'firstname'             => ['required'],
+            'lastname'              => ['required'],
+            'email'                 => ['required', 'string', 'email', 'max:255', 'unique:users,email,' .$account->id,],
+            'mobile_number'         => ['required'],
+        
+        ]);
+        if ($validated->fails()) {
+            return response()->json(['errors' => $validated->errors()]);
+        }
 
-        return redirect()->route('admin.users.index');
+        User::find($account->id)->update([
+            'firstname'  => $request->input('firstname'),
+            'lastname'  => $request->input('lastname'),
+            'email'  => $request->input('email'),
+            'mobile_number'  => $request->input('mobile_number'),
+            'password' => Hash::make($request->input('password')),
+        ]);
+        return response()->json(['success' => 'Updated Successfully.']);
     }
 
-    public function show(User $user)
+   
+
+    public function destroy(User $account)
     {
-        abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $user->load('roles');
-
-        return view('admin.users.show', compact('user'));
+        RoleUser::where('user_id',$account->id)->delete();
+        return response()->json(['success' => $account->delete()]);
     }
 
-    public function destroy(User $user)
+    public function changepassword()
     {
-        abort_if(Gate::denies('user_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        return view('admin.admin.change_password.change_password');
 
-        $user->delete();
+    }
+    public function passwordupdate(Request $request , User $user){
+        date_default_timezone_set('Asia/Manila');
+        $validated =  Validator::make($request->all(), [
+            'current_password' => ['required',new MatchOldPassword],
+            'new_password' => ['required','min:8'
+                                ,'regex:/[A-Z]/'
+                                ,'regex:/[a-z]/'
+                                ,'regex:/[0-9]/'      
+                            ],
+            'confirm_password' => ['required','same:new_password'],
+        ]);
+        if ($validated->fails()) {
+            return response()->json(['errors' => $validated->errors()]);
+        }
 
-        return back();
+        User::find($user->id)->update([
+            'password' => Hash::make($request->input('new_password')),
+          
+        ]);
+        return response()->json(['success' => 'Updated Successfully.']);
     }
 
-    public function massDestroy(MassDestroyUserRequest $request)
-    {
-        User::whereIn('id', request('ids'))->delete();
-
-        return response(null, Response::HTTP_NO_CONTENT);
-    }
 }
