@@ -185,9 +185,6 @@
  
 
 
-
-
-
 @endsection
 @section('scripts')
 <script>
