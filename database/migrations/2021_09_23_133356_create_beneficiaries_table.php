@@ -29,7 +29,10 @@ class CreateBeneficiariesTable extends Migration
             //Address Details
             $table->string('address')->nullable();
             $table->string('purpose_of_remit')->nullable();
+            $table->string('purpose_of_remit_others')->nullable();
             $table->string('relation_with_beneficiary')->nullable();
+            $table->string('relation_with_beneficiary_others')->nullable();
+            $table->string('beneficiary_email')->nullable();
 
 
             $table->timestamps();

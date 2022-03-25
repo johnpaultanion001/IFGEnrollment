@@ -122,7 +122,7 @@
                                         <tr>
                                             <th scope="row">Mobile No.:</th>
                                             <td id="lbl_rmobile_number"></td>
-                                            <th scope="row">Paymet Mode:</th>
+                                            <th scope="row">Delivery Type:</th>
                                             <td id="lbl_payment_mode"></td>
                                         </tr>
                                         <tr>

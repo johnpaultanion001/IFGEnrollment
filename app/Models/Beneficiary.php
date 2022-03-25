@@ -25,8 +25,10 @@ class Beneficiary extends Model
         //Address Details
         'address',
         'purpose_of_remit',
+        'purpose_of_remit_others',
         'relation_with_beneficiary',
-
+        'relation_with_beneficiary_others',
+        'beneficiary_email',
         'created_at',
         'updated_at',
         'deleted_at',

@@ -120,7 +120,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="control-label text-uppercase" >Mobile Number:<span class="text-danger">*</span> </label>
-                                <input type="text" name="mobile_number" id="mobile_number" class="form-control" />
+                                <input type="number" name="mobile_number" id="mobile_number" class="form-control" />
                                 <span class="invalid-feedback" role="alert">
                                     <strong id="error-mobile_number"></strong>
                                 </span>

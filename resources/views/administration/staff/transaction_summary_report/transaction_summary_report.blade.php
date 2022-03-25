@@ -112,7 +112,7 @@ $(document).on('click', '.transaction_status', function(event){
         dataType: "json",
         data:{transaction:transaction, _token:_token},
         beforeSend: function() {
-            
+            $('.transaction_status').attr('disabled', true);
         },
         success:function(data){
             if(data.success){
@@ -133,7 +133,7 @@ $(document).on('click', '.transaction_payment', function(event){
         dataType: "json",
         data:{payment:payment, _token:_token},
         beforeSend: function() {
-            
+            $('.transaction_payment').attr('disabled', true);
         },
         success:function(data){
             if(data.success){

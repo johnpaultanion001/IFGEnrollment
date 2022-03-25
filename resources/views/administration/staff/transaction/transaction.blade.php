@@ -209,7 +209,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="control-label text-uppercase" >PAYMENT MODE:</label>
+                                        <label class="control-label text-uppercase" >Delivery Type:</label>
                                         <input type="text" name="rpayment_mode" id="rpayment_mode"  class="classic-input2 form-control font-weight-bold map-input" readonly>
                                         <span class="invalid-feedback" role="alert">
                                             <strong id="error-rpayment_mode"></strong>
@@ -292,7 +292,7 @@
                             <div class="col-sm-12"> 
                                 <div class="col-sm-8 mx-auto">
                                     <div class="form-group">
-                                        <label class="control-label text-uppercase" >Payment Mode</label>
+                                        <label class="control-label text-uppercase" >Delivery Type</label>
                                         <input type="text" name="transaction_payment_mode" id="transaction_payment_mode" class="form-control" readonly>
                                         <span class="invalid-feedback" role="alert">
                                             <strong id="error-transaction_payment_mode"></strong>
@@ -435,7 +435,7 @@
             
                     <!-- Modal Header -->
                     <div class="modal-header ">
-                        <p class="modal-title-beneficiary  text-uppercase font-weight-bold">Modal Heading</p>
+                        <p class="modal-title  text-uppercase font-weight-bold">Modal Heading</p>
                         <button type="button" class="close " data-dismiss="modal">&times;</button>
                     </div>
 
@@ -461,7 +461,7 @@
 
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label class="control-label text-uppercase" >Payment Mode <span class="text-danger">*</span> </label>
+                                    <label class="control-label text-uppercase" >Delivery Type <span class="text-danger">*</span> </label>
                                     <select name="payment_mode" id="payment_mode" class="form-control select2" style="width: 100%">
                                         <option value="" disabled selected>Please Select</option>
                                         <option value="Account Deposit">Account Deposit</option>
@@ -493,7 +493,7 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-6" id="section_account_number">
                                 <div class="form-group">
                                     <label class="control-label text-uppercase" >Account Number:<span class="text-danger">*</span> </label>
                                     <input type="number" name="account_number" id="account_number" class="form-control" />
@@ -536,10 +536,56 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
+                                    <label class="control-label text-uppercase" >Beneficiary Email<span class="text-danger">*</span></label>
+                                    <input type="email" name="beneficiary_email" id="beneficiary_email" class="form-control" />
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong id="error-beneficiary_email"></strong>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
                                     <label class="control-label text-uppercase" >Mobile Number<span class="text-danger">*</span></label>
                                     <input type="number" name="beneficiary_mobile_number" id="beneficiary_mobile_number" class="form-control" />
                                     <span class="invalid-feedback" role="alert">
                                         <strong id="error-beneficiary_mobile_number"></strong>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label text-uppercase" >Relation with Beneficiary<span class="text-danger">*</span> </label>
+                                    <select name="relation_with_beneficiary" id="relation_with_beneficiary" class="form-control select2" style="width: 100%">
+                                        <option value="" disabled selected>Please Select</option>
+                                        <option value="Aunt">Aunt</option>
+                                        <option value="Brother">Brother</option>
+                                        <option value="Brother in Law">Brother in Law</option>
+                                        <option value="Cousin">Cousin</option>
+                                        <option value="Daughter">Daughter</option>
+                                        <option value="Daughter in law">Daughter in law</option>
+                                        <option value="Father">Father</option>
+                                        <option value="Father in Law">Father in Law</option>
+                                        <option value="Fiancée">Fiancée</option>
+                                        <option value="Friend">Friend</option>
+                                        <option value="Husband">Husband</option>
+                                        <option value="Mother">Mother</option>
+                                        <option value="Mother in Law">Mother in Law</option>
+                                        <option value="Nephew">Nephew</option>
+                                        <option value="Niece">Niece</option>
+                                        <option value="Sister">Sister</option>
+                                        <option value="Sister in Law">Sister in Law</option>
+                                        <option value="Spouse">Spouse</option>
+                                        <option value="Staff">Staff</option>
+                                        <option value="Uncle">Uncle</option>
+                                        <option value="Wife">Wife</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                                    <div id="section_relation_with_beneficiary_others">
+                                        <label class="control-label text-uppercase" >Others<span class="text-danger">*</span> </label>
+                                        <input type="text" name="relation_with_beneficiary_others" id="relation_with_beneficiary_others" class="form-control" />
+                                    </div>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong id="error-relation_with_beneficiary"></strong>
                                     </span>
                                 </div>
                             </div>
@@ -575,53 +621,23 @@
                                         <option value="Salary">Salary</option>
                                         <option value="Savings">Savings</option>
                                         <option value="Others">Others</option>
-
-                                    
                                     </select>
+                                    <div id="section_purpose_of_remit_others">
+                                        <label class="control-label text-uppercase" >Others<span class="text-danger">*</span> </label>
+                                        <input type="text" name="purpose_of_remit_others" id="purpose_of_remit_others" class="form-control" />
+                                    </div>
                                     <span class="invalid-feedback" role="alert">
                                         <strong id="error-purpose_of_remit"></strong>
                                     </span>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label class="control-label text-uppercase" >Relation with Beneficiary<span class="text-danger">*</span> </label>
-                                    <select name="relation_with_beneficiary" id="relation_with_beneficiary" class="form-control select2" style="width: 100%">
-                                        <option value="" disabled selected>Please Select</option>
-                                        <option value="Aunt">Aunt</option>
-                                        <option value="Brother">Brother</option>
-                                        <option value="Brother in Law">Brother in Law</option>
-                                        <option value="Cousin">Cousin</option>
-                                        <option value="Daughter">Daughter</option>
-                                        <option value="Daughter in law">Daughter in law</option>
-                                        <option value="Father">Father</option>
-                                        <option value="Father in Law">Father in Law</option>
-                                        <option value="Fiancée">Fiancée</option>
-                                        <option value="Friend">Friend</option>
-                                        <option value="Husband">Husband</option>
-                                        <option value="Mother">Mother</option>
-                                        <option value="Mother in Law">Mother in Law</option>
-                                        <option value="Nephew">Nephew</option>
-                                        <option value="Niece">Niece</option>
-                                        <option value="Sister">Sister</option>
-                                        <option value="Sister in Law">Sister in Law</option>
-                                        <option value="Spouse">Spouse</option>
-                                        <option value="Staff">Staff</option>
-                                        <option value="Uncle">Uncle</option>
-                                        <option value="Wife">Wife</option>
-                                        <option value="Others">Others</option>
-                                    </select>
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong id="error-relation_with_beneficiary"></strong>
-                                    </span>
-                                </div>
-                            </div>
+                            
                             
                         
                             
                             
                         </div>
-                        <input type="hidden" name="beneficiary_user_id" id="beneficiary_user_id"/>
+                        <input type="hidden" name="beneficiary_user_id" id="beneficiary_user_id"  value="{{Auth::user()->id}}"/>
                         <input type="hidden" name="beneficiary_action" id="beneficiary_action" value="Add" />
                         <input type="hidden" name="beneficiary_hidden_id" id="beneficiary_hidden_id" />
                     </div>
@@ -652,15 +668,15 @@
                 <!-- Modal body -->
                 <div class="modal-body">
                     <div id="transaction_detail" class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label class="control-label text-uppercase" >Transaction ID:</label>
-                            <input type="text" name="transaction_id" id="transaction_id" readonly class="form-control"/>
-                        </div>
-                    </div>
                     <div class="col-sm-12">
                         <table class="table table-bordered table-striped">
                                 <tbody>
+                                    <tr>
+                                        <th scope="row">Transaction ID:</th>
+                                        <td id="transaction_id"></td>
+                                        <th></th>
+                                        <td></td>
+                                    </tr>
                                     <tr>
                                         <th scope="row">Payout Partner:</th>
                                         <td id="lbl_payout_partner"></td>
@@ -716,7 +732,8 @@
                 <!-- Modal footer -->
                 <div class="modal-footer bg-white">
                     <button type="button" id="transaction_cancel" class="btn btn-danger text-uppercase">CANCEL</button>
-                    <input type="button" data-dismiss="modal" name="transaction_detail_action_button" id="transaction_detail_action_button" class="text-uppercase btn btn-primary" value="CLOSE" />
+                    <input type="button"  id="transaction_detail_print_button" class="text-uppercase btn btn-success" value="PRINT" />
+                    <input type="button" data-dismiss="modal" name="transaction_detail_action_button" id="transaction_detail_action_button" class="text-uppercase btn btn-primary" value="SAVE" />
                 </div>
         
             </div>
@@ -736,6 +753,8 @@ $(document).ready(function () {
    $('#transaction_country_id').hide();
    $('#transaction_sender_id').hide();
    $('#transaction_beneficiary_id').hide();
+   $('#section_relation_with_beneficiary_others').hide();
+    $('#section_purpose_of_remit_others').hide();
    $('#edit_beneficiary').hide();
 });
 
@@ -882,7 +901,7 @@ $(document).on('click', '#transaction_button', function(){
 });
 
 function transaction_details(){
-    var transaction_id = $('#transaction_id').val();
+    var transaction_id = $('#transaction_id').text();
     $.ajax({
         url: "/admin/transaction/transaction_details", 
         type: "get",
@@ -896,7 +915,7 @@ function transaction_details(){
         },
         success: function(data){
             $("#transaction_detail_action_button").attr("disabled", false);
-            $("#transaction_detail_action_button").attr("value", "CLOSE");
+            $("#transaction_detail_action_button").attr("value", "SAVE");
 
             $('#lbl_payout_partner').text(data.payout_partner);
             $('#lbl_status').text(data.status);
@@ -977,7 +996,7 @@ $('#transactionForm').on('submit', function(event){
                 $('#transactionForm')[0].reset();
                 $('#transactionModal').modal('hide');
                 $('#transactionDetailModal').modal('show');
-                $('#transaction_id').val(data.transaction_id);
+                $('#transaction_id').text(data.transaction_id);
                 transaction_details();
             }
         }
@@ -1131,7 +1150,7 @@ $(document).on('click', '#edit_beneficiary', function(){
 });
 
 $(document).on('click', '#lbl_status', function(event){
-    var payment = $('#transaction_id').val();
+    var payment = $('#transaction_id').text();
     var _token =  $('input[name="_token"]').val();
 
     $.ajax({
@@ -1152,7 +1171,7 @@ $(document).on('click', '#lbl_status', function(event){
 });
 
 $(document).on('click', '#transaction_cancel', function(){
-  var transaction_id = $('#transaction_id').val();
+  var transaction_id = $('#transaction_id').text();
   $.confirm({
       title: 'Confirmation',
       content: 'You really want cancel this transaction?',
@@ -1191,6 +1210,38 @@ $(document).on('click', '#transaction_cancel', function(){
 
 });
 
+$('select[id="payment_mode"]').on("change", function(event){
+  if($(this).val() == 'Cash Pick Up'){
+    $('#section_account_number').hide();
+  }else{
+    $('#section_account_number').show();
+  }
+  
+});
 
+$('select[id="relation_with_beneficiary"]').on("change", function(event){
+  if($(this).val() == 'Others'){
+    $('#section_relation_with_beneficiary_others').show();
+  }else{
+    $('#section_relation_with_beneficiary_others').hide();
+  }
+});
+
+$('select[id="purpose_of_remit"]').on("change", function(event){
+  if($(this).val() == 'Others'){
+    $('#section_purpose_of_remit_others').show();
+  }else{
+    $('#section_purpose_of_remit_others').hide();
+  }
+});
+
+
+$(document).on('click', '#transaction_detail_print_button', function(){
+        var printContents = document.getElementById('transaction_detail').innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+});
 </script>
 @endsection

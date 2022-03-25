@@ -34,10 +34,10 @@
                             Send Amount
                         </th>
                         <th>
-                            Status
+                            Payment
                         </th>
                         <th>
-                            Payment
+                            Status
                         </th>
                     </tr>
                 </thead>
@@ -68,21 +68,34 @@
                                 {{ $history->transaction_payment_mode ?? '' }}
                             </td>
                             <td>
-                                @if($history->status == 0)
-                                    <span class="badge badge-success">Sending</span>
-                                @elseif($history->status == 1)
-                                   <span class="badge badge-warning">Ready For Pickup</span>
-                                @elseif($history->status == 2)
-                                    <span class="badge badge-primary">Claimed</span>
-                                @endif
-                            </td>
-                            <td>
                                 @if($history->isPaid == false)
                                     <span class="badge badge-danger">UNPAID</span>
                                 @elseif($history->isPaid == true)
                                     <span class="badge badge-success">PAID</span>
                                 @endif
                             </td>
+                            <td>
+                                @if($history->status == 0)
+                                    <span class="badge badge-success">SENDING</span>
+                                @elseif($history->status == 1)
+                                   <span class="badge badge-warning">
+                                        @if($history->transaction_payment_mode == 'Cash Pick Up')
+                                            READY FOR PICKUP
+                                        @elseif($history->transaction_payment_mode == 'Account Deposit')
+                                            FOR PROCESSING
+                                        @endif
+                                   </span>
+                                @elseif($history->status == 2)
+                                    <span class="badge badge-primary">
+                                        @if($history->transaction_payment_mode == 'Cash Pick Up')
+                                            CLAIMED
+                                        @elseif($history->transaction_payment_mode == 'Account Deposit')
+                                            CREDITED
+                                        @endif
+                                    </span>
+                                @endif
+                            </td>
+                           
                         </tr>
                     @endforeach
                 </tbody>

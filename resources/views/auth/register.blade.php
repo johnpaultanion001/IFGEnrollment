@@ -35,19 +35,22 @@
                         <input type="password" id="password" name="password" class="classic-input form-control font-weight-bold {{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="Password">
                         <span toggle="#password-field" class="fa fa-fw fa-eye field_icon toggle-password" style="float: right; margin-right: 10px; margin-top: -25px; position: relative; z-index: 2;"></span>
                         
-                        @if($errors->has('password'))
-                            <div class="invalid-feedback color-red">
-                                  * At least one letter <br>
-                                  * At least one capital letter <br>
-                                  * At least one number <br>
-                                  * Be at least 8 characters <br>
-                            </div>
-                        @endif
                       </div>
                       <div class="form-group">
                         <input type="password" id="password_confirmation" name="password_confirmation" class="classic-input form-control font-weight-bold" placeholder="Confirm Password">
                         <span toggle="#confirm_password-field" class="fa fa-fw fa-eye field_icon toggle-confirm_password" style="float: right; margin-right: 10px; margin-top: -25px; position: relative; z-index: 2;"></span>
 
+                      </div>
+                      <div class="form-group">
+                          <div class="text-dark text-sm h6">
+                            Password must meet the following requirements <br>
+                        </div>
+                        <div class="text-success text-sm">
+                              * At least one letter <br>
+                              * At least one capital letter <br>
+                              * At least one number <br>
+                              * Be at least 8 characters <br>
+                        </div>
                       </div>
                       
                       <input type="submit" name="register" id="register" class="btn btn-main" value="Register" />

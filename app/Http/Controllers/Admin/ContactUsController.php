@@ -41,7 +41,7 @@ class ContactUsController extends Controller
         	'message' => $request->input('message'),
         ];
         
-        Mail::to('philippines@jpremit.com')
+        Mail::to('johnpaultanion001@gmail.com')
                 ->send(new SendingMail($valueArray));
 
         return response()->json(['success' => 'Send Successfully']);

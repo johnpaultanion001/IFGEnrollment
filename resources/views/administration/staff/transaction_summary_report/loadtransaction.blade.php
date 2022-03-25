@@ -9,16 +9,16 @@
                     <div class="col-md-2 mb-1">
                         <select class="select2 form-control dd_filter" filter="status">
                             <option value="" >Status</option>
-                            <option value="0">Sending</option>
-                            <option value="1">Ready For Pickup</option>
-                            <option value="2">Claimed</option>
+                            <option value="0">SENDING</option>
+                            <option value="1">READY FOR PICKUP / CREDITED</option>
+                            <option value="2">CLAIMED / CREDITED</option>
                         </select>
                     </div>
                     <div class="col-md-2 mb-1">
                         <select class="select2 form-control dd_filter" filter="payment">
                             <option value="">Payment</option>
-                            <option value="1">Paid</option>
-                            <option value="0">Unpaid</option>
+                            <option value="1">PAID</option>
+                            <option value="0">UNPAID</option>
                         </select>
                     </div>
                     <div class="col-md-2 mb-1">
@@ -53,11 +53,12 @@
                                 Receive Amount
                             </th>
                             <th>
-                                Status
-                            </th>
-                            <th>
                                 Payment
                             </th>
+                            <th>
+                                Status
+                            </th>
+                           
                         </tr>
                     </thead>
                     <tbody>
@@ -84,20 +85,33 @@
                                 <td>
                                     {{  number_format($transaction->receive_amount , 0, ',', ',') }} {{$transaction->country->code ?? ''}}
                                 </td>
-                                <td>
-                                    @if($transaction->status == 0)
-                                        <button status="{{$transaction->id}}" class="transaction_status btn btn-sm btn-success">SENDING</button>
-                                    @elseif($transaction->status == 1)
-                                        <button status="{{$transaction->id}}" class="transaction_status btn btn-sm btn-warning">READY FOR PICKUP</button>
-                                    @elseif($transaction->status == 2)
-                                        <button status="{{$transaction->id}}" class="transaction_status btn btn-sm btn-primary">CLAIMED</button>
-                                    @endif
-                                </td>
+                                
                                 <td>
                                     @if($transaction->isPaid == false)
                                         <button payment="{{$transaction->id}}" class="transaction_payment btn btn-danger btn-sm">UNPAID</button>
                                     @elseif($transaction->isPaid == true)
                                         <button payment="{{$transaction->id}}" class="transaction_payment btn btn-success btn-sm">PAID</button>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($transaction->status == 0)
+                                        <button status="{{$transaction->id}}" class="transaction_status btn btn-sm btn-success">SENDING</button>
+                                    @elseif($transaction->status == 1)
+                                        <button status="{{$transaction->id}}" class="transaction_status btn btn-sm btn-warning">
+                                            @if($transaction->transaction_payment_mode == 'Cash Pick Up')
+                                                READY FOR PICKUP
+                                            @elseif($transaction->transaction_payment_mode == 'Account Deposit')
+                                                FOR PROCESSING
+                                            @endif
+                                        </button>
+                                    @elseif($transaction->status == 2)
+                                        <button status="{{$transaction->id}}" class="transaction_status btn btn-sm btn-primary">
+                                           @if($transaction->transaction_payment_mode == 'Cash Pick Up')
+                                                CLAIMED
+                                           @elseif($transaction->transaction_payment_mode == 'Account Deposit')
+                                                CREDITED
+                                           @endif
+                                        </button>
                                     @endif
                                 </td>
                             </tr>
@@ -107,6 +121,7 @@
             </div>
         </div>
 </div>
+
 
 <script>
 $(function () {

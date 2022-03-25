@@ -29,9 +29,21 @@
             <div class="col-12 text-left">
                 <h6 class="text-dark">{{$transaction->updated_at}}</h6>
                 <h6 class="text-success">
-                    {{ $transaction->status == 0 ? 'Sending' : '' }}
-                    {{ $transaction->status == 1 ? 'Ready For Pickup' : '' }}
-                    {{ $transaction->status == 2 ? 'Claimed' : '' }}
+                    @if($transaction->status == 0)
+                        SENDING
+                    @elseif($transaction->status == 1)
+                        @if($transaction->transaction_payment_mode == 'Cash Pick Up')
+                            READY FOR PICKUP
+                        @elseif($transaction->transaction_payment_mode == 'Account Deposit')
+                            FOR PROCESSING
+                        @endif
+                    @elseif($transaction->status == 2)
+                        @if($transaction->transaction_payment_mode == 'Cash Pick Up')
+                            CLAIMED
+                        @elseif($transaction->transaction_payment_mode == 'Account Deposit')
+                            CREDITED
+                        @endif
+                    @endif
                 </h6>
                 
             </div>

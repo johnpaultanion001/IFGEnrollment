@@ -4,213 +4,232 @@
         
     </div>
 
-<form method="post" id="beneficiaryForm" class="form-horizontal ">
-    @csrf
-    <div class="modal" id="beneficiaryModal" data-keyboard="false" data-backdrop="static">
-        <div class="modal-dialog modal-lg modal-dialog-centered ">
-            <div class="modal-content">
-        
-                <!-- Modal Header -->
-                <div class="modal-header ">
-                    <p class="modal-title  text-uppercase font-weight-bold">Modal Heading</p>
-                    <button type="button" class="close " data-dismiss="modal">&times;</button>
-                </div>
-
-                    
-                <!-- Modal body -->
-                <div class="modal-body">
-                 <div id="modalbody" class="modalbody row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label class="control-label text-uppercase" >Receipt Country <span class="text-danger">*</span></label>
-                                <select name="receipt_country" id="receipt_country" class="form-control select2" style="width: 100%">
-                                    <option value="" disabled selected>Please Select</option>
-                                    @foreach ($countries as $country)
-                                        <option value="{{$country->id}}"> {{$country->country}}</option>
-                                    @endforeach
-                                </select>
-                                <span class="invalid-feedback" role="alert">
-                                    <strong id="error-receipt_country"></strong>
-                                </span>
-                              
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label class="control-label text-uppercase" >Payment Mode <span class="text-danger">*</span> </label>
-                                <select name="payment_mode" id="payment_mode" class="form-control select2" style="width: 100%">
-                                    <option value="" disabled selected>Please Select</option>
-                                    <option value="Account Deposit">Account Deposit</option>
-                                    <option value="Cash Pick Up">Cash Pick Up</option>
-                                  
-                                </select>
-                                <span class="invalid-feedback" role="alert">
-                                    <strong id="error-payment_mode"></strong>
-                                </span>
-                            </div>
-                        </div>
-                        <br>
-                        <br>
-                        <div class="col-sm-12">
-                            <h6 class="text-dark font-weight-bold">Payout Location Details</h6>
-                            <hr class="my-2 bg-muted">
-                        </div>
-                        <br>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label class="control-label text-uppercase" >Bank Name<span class="text-danger">*</span> </label>
-                                <select name="bank_name" id="bank_name" class="form-control select2" style="width: 100%">
-                                    <option value="" disabled selected>Please Select</option>
-                                    @foreach ($banks as $bank)
-                                        <option value="{{$bank->id}}"> {{$bank->name}}</option>
-                                    @endforeach
-                                </select>
-                                <span class="invalid-feedback" role="alert">
-                                    <strong id="error-bank_name"></strong>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label class="control-label text-uppercase" >Account Number:<span class="text-danger">*</span> </label>
-                                <input type="number" name="account_number" id="account_number" class="form-control" />
-                                <span class="invalid-feedback" role="alert">
-                                    <strong id="error-account_number"></strong>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <h6 class="text-dark font-weight-bold">Beneficiary Details</h6>
-                            <hr class="my-2 bg-muted">
-                        </div>
-                        <br>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label class="control-label text-uppercase" >Beneficiary First Name<span class="text-danger">*</span> </label>
-                                <input type="text" name="beneficiary_firstname" id="beneficiary_firstname" class="form-control" />
-                                <span class="invalid-feedback" role="alert">
-                                    <strong id="error-beneficiary_firstname"></strong>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label class="control-label text-uppercase" >Beneficiary Middle Name</label>
-                                <input type="text" name="beneficiary_middlename" id="beneficiary_middlename" class="form-control" />
-                                <span class="invalid-feedback" role="alert">
-                                    <strong id="error-beneficiary_middlename"></strong>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label class="control-label text-uppercase" >Beneficiary Last Name<span class="text-danger">*</span></label>
-                                <input type="text" name="beneficiary_lastname" id="beneficiary_lastname" class="form-control" />
-                                <span class="invalid-feedback" role="alert">
-                                    <strong id="error-beneficiary_lastname"></strong>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label class="control-label text-uppercase" >Mobile Number<span class="text-danger">*</span></label>
-                                <input type="number" name="beneficiary_mobile_number" id="beneficiary_mobile_number" class="form-control" />
-                                <span class="invalid-feedback" role="alert">
-                                    <strong id="error-beneficiary_mobile_number"></strong>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <h6 class="text-dark font-weight-bold">Address Details</h6>
-                            <hr class="my-2 bg-muted">
-                        </div>
-                        <br>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label class="control-label text-uppercase" >Address<span class="text-danger">*</span></label>
-                                <input type="text" name="beneficiary_address" id="beneficiary_address" class="form-control" />
-                                <span class="invalid-feedback" role="alert">
-                                    <strong id="error-beneficiary_address"></strong>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label class="control-label text-uppercase" >Purpose of Remit<span class="text-danger">*</span> </label>
-                                <select name="purpose_of_remit" id="purpose_of_remit" class="form-control select2" style="width: 100%">
-                                    <option value="" disabled selected>Please Select</option>
-                                    <option value="Business">Business</option>
-                                    <option value="Donation">Donation</option>
-                                    <option value="Family Maintenance">Family Maintenance</option>
-                                    <option value="Gift">Gift</option>
-                                    <option value="Investment">Investment</option>
-                                    <option value="Lending Money">Lending Money</option>
-                                    <option value="Living Expenses">Living Expenses</option>
-                                    <option value="Medical Expenses">Medical Expenses</option>
-                                    <option value="Rental Payment">Rental Payment</option>
-                                    <option value="Payment for Goods and Services">Payment for Goods and Services</option>
-                                    <option value="Salary">Salary</option>
-                                    <option value="Savings">Savings</option>
-                                    <option value="Others">Others</option>
-                                </select>
-                                <span class="invalid-feedback" role="alert">
-                                    <strong id="error-purpose_of_remit"></strong>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label class="control-label text-uppercase" >Relation with Beneficiary<span class="text-danger">*</span> </label>
-                                <select name="relation_with_beneficiary" id="relation_with_beneficiary" class="form-control select2" style="width: 100%">
-                                    <option value="" disabled selected>Please Select</option>
-                                    <option value="Aunt">Aunt</option>
-                                    <option value="Brother">Brother</option>
-                                    <option value="Brother in Law">Brother in Law</option>
-                                    <option value="Cousin">Cousin</option>
-                                    <option value="Daughter">Daughter</option>
-                                    <option value="Daughter in law">Daughter in law</option>
-                                    <option value="Father">Father</option>
-                                    <option value="Father in Law">Father in Law</option>
-                                    <option value="Fiancée">Fiancée</option>
-                                    <option value="Friend">Friend</option>
-                                    <option value="Husband">Husband</option>
-                                    <option value="Mother">Mother</option>
-                                    <option value="Mother in Law">Mother in Law</option>
-                                    <option value="Nephew">Nephew</option>
-                                    <option value="Niece">Niece</option>
-                                    <option value="Sister">Sister</option>
-                                    <option value="Sister in Law">Sister in Law</option>
-                                    <option value="Spouse">Spouse</option>
-                                    <option value="Staff">Staff</option>
-                                    <option value="Uncle">Uncle</option>
-                                    <option value="Wife">Wife</option>
-                                    <option value="Others">Others</option>
-                                </select>
-                                <span class="invalid-feedback" role="alert">
-                                    <strong id="error-relation_with_beneficiary"></strong>
-                                </span>
-                            </div>
-                        </div>
-                        
-                       
-                        
-                        
+    <form method="post" id="beneficiaryForm" class="form-horizontal ">
+        @csrf
+        <div class="modal" id="beneficiaryModal" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog modal-lg modal-dialog-centered ">
+                <div class="modal-content">
+            
+                    <!-- Modal Header -->
+                    <div class="modal-header ">
+                        <p class="modal-title  text-uppercase font-weight-bold">Modal Heading</p>
+                        <button type="button" class="close " data-dismiss="modal">&times;</button>
                     </div>
-                    <input type="hidden" name="beneficiary_action" id="beneficiary_action" value="Add" />
-                    <input type="hidden" name="beneficiary_hidden_id" id="beneficiary_hidden_id" />
+
+                        
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                    <div id="modalbody" class="modalbody row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label text-uppercase" >Receipt Country <span class="text-danger">*</span></label>
+                                    <select name="receipt_country" id="receipt_country" class="form-control select2 form-control" style="width: 100%">
+                                        <option value="" disabled selected>Please Select</option>
+                                        @foreach ($countries as $country)
+                                            <option value="{{$country->id}}"> {{$country->country}}</option>
+                                        @endforeach
+                                    </select>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong id="error-receipt_country"></strong>
+                                    </span>
+                                
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label text-uppercase" >Delivery Type <span class="text-danger">*</span> </label>
+                                    <select name="payment_mode" id="payment_mode" class="form-control select2" style="width: 100%">
+                                        <option value="" disabled selected>Please Select</option>
+                                        <option value="Account Deposit">Account Deposit</option>
+                                        <option value="Cash Pick Up">Cash Pick Up</option>
+                                    </select>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong id="error-payment_mode"></strong>
+                                    </span>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="col-sm-12">
+                                <h6 class="text-dark font-weight-bold">Payout Location Details</h6>
+                                <hr class="my-2 bg-muted">
+                            </div>
+                            <br>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label text-uppercase" >Bank Name<span class="text-danger">*</span> </label>
+                                    <select name="bank_name" id="bank_name" class="form-control select2" style="width: 100%">
+                                        <option value="" disabled selected>Please Select</option>
+                                        @foreach ($banks as $bank)
+                                            <option value="{{$bank->id}}"> {{$bank->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong id="error-bank_name"></strong>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6" id="section_account_number">
+                                <div class="form-group">
+                                    <label class="control-label text-uppercase" >Account Number:<span class="text-danger">*</span> </label>
+                                    <input type="number" name="account_number" id="account_number" class="form-control" />
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong id="error-account_number"></strong>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <h6 class="text-dark font-weight-bold">Beneficiary Details</h6>
+                                <hr class="my-2 bg-muted">
+                            </div>
+                            <br>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label text-uppercase" >Beneficiary First Name<span class="text-danger">*</span> </label>
+                                    <input type="text" name="beneficiary_firstname" id="beneficiary_firstname" class="form-control" />
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong id="error-beneficiary_firstname"></strong>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label text-uppercase" >Beneficiary Middle Name</label>
+                                    <input type="text" name="beneficiary_middlename" id="beneficiary_middlename" class="form-control" />
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong id="error-beneficiary_middlename"></strong>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label text-uppercase" >Beneficiary Last Name<span class="text-danger">*</span></label>
+                                    <input type="text" name="beneficiary_lastname" id="beneficiary_lastname" class="form-control" />
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong id="error-beneficiary_lastname"></strong>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label text-uppercase" >Beneficiary Email<span class="text-danger">*</span></label>
+                                    <input type="email" name="beneficiary_email" id="beneficiary_email" class="form-control" />
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong id="error-beneficiary_email"></strong>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label text-uppercase" >Mobile Number<span class="text-danger">*</span></label>
+                                    <input type="number" name="beneficiary_mobile_number" id="beneficiary_mobile_number" class="form-control" />
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong id="error-beneficiary_mobile_number"></strong>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label text-uppercase" >Relation with Beneficiary<span class="text-danger">*</span> </label>
+                                    <select name="relation_with_beneficiary" id="relation_with_beneficiary" class="form-control select2" style="width: 100%">
+                                        <option value="" disabled selected>Please Select</option>
+                                        <option value="Aunt">Aunt</option>
+                                        <option value="Brother">Brother</option>
+                                        <option value="Brother in Law">Brother in Law</option>
+                                        <option value="Cousin">Cousin</option>
+                                        <option value="Daughter">Daughter</option>
+                                        <option value="Daughter in law">Daughter in law</option>
+                                        <option value="Father">Father</option>
+                                        <option value="Father in Law">Father in Law</option>
+                                        <option value="Fiancée">Fiancée</option>
+                                        <option value="Friend">Friend</option>
+                                        <option value="Husband">Husband</option>
+                                        <option value="Mother">Mother</option>
+                                        <option value="Mother in Law">Mother in Law</option>
+                                        <option value="Nephew">Nephew</option>
+                                        <option value="Niece">Niece</option>
+                                        <option value="Sister">Sister</option>
+                                        <option value="Sister in Law">Sister in Law</option>
+                                        <option value="Spouse">Spouse</option>
+                                        <option value="Staff">Staff</option>
+                                        <option value="Uncle">Uncle</option>
+                                        <option value="Wife">Wife</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                                    <div id="section_relation_with_beneficiary_others">
+                                        <label class="control-label text-uppercase" >Others<span class="text-danger">*</span> </label>
+                                        <input type="text" name="relation_with_beneficiary_others" id="relation_with_beneficiary_others" class="form-control" />
+                                    </div>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong id="error-relation_with_beneficiary"></strong>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <h6 class="text-dark font-weight-bold">Address Details</h6>
+                                <hr class="my-2 bg-muted">
+                            </div>
+                            <br>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label text-uppercase" >Address<span class="text-danger">*</span></label>
+                                    <input type="text" name="beneficiary_address" id="beneficiary_address" class="form-control" />
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong id="error-beneficiary_address"></strong>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label text-uppercase" >Purpose of Remit<span class="text-danger">*</span> </label>
+                                    <select name="purpose_of_remit" id="purpose_of_remit" class="form-control select2" style="width: 100%">
+                                        <option value="" disabled selected>Please Select</option>
+                                        <option value="Business">Business</option>
+                                        <option value="Donation">Donation</option>
+                                        <option value="Family Maintenance">Family Maintenance</option>
+                                        <option value="Gift">Gift</option>
+                                        <option value="Investment">Investment</option>
+                                        <option value="Lending Money">Lending Money</option>
+                                        <option value="Living Expenses">Living Expenses</option>
+                                        <option value="Medical Expenses">Medical Expenses</option>
+                                        <option value="Rental Payment">Rental Payment</option>
+                                        <option value="Payment for Goods and Services">Payment for Goods and Services</option>
+                                        <option value="Salary">Salary</option>
+                                        <option value="Savings">Savings</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                                    <div id="section_purpose_of_remit_others">
+                                        <label class="control-label text-uppercase" >Others<span class="text-danger">*</span> </label>
+                                        <input type="text" name="purpose_of_remit_others" id="purpose_of_remit_others" class="form-control" />
+                                    </div>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong id="error-purpose_of_remit"></strong>
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            
+                        
+                            
+                            
+                        </div>
+                        <input type="hidden" name="beneficiary_user_id" id="beneficiary_user_id"  value="{{Auth::user()->id}}"/>
+                        <input type="hidden" name="beneficiary_action" id="beneficiary_action" value="Add" />
+                        <input type="hidden" name="beneficiary_hidden_id" id="beneficiary_hidden_id" />
+                    </div>
+            
+                    <!-- Modal footer -->
+                    <div class="modal-footer bg-white">
+                        <button type="button" class="btn btn-white text-uppercase" data-dismiss="modal">Close</button>
+                        <input type="submit" name="beneficiary_action_button" id="beneficiary_action_button" class="text-uppercase btn btn-primary" value="Save" />
+                    </div>
+            
                 </div>
-        
-                <!-- Modal footer -->
-                <div class="modal-footer bg-white">
-                    <button type="button" class="btn btn-white text-uppercase" data-dismiss="modal">Close</button>
-                    <input type="submit" name="beneficiary_action_button" id="beneficiary_action_button" class="text-uppercase btn btn-primary" value="Save" />
-                </div>
-        
             </div>
         </div>
-    </div>
-</form>
+    </form>
+
 
     <form method="post" id="transactionForm" class="form-horizontal">
         @csrf
@@ -270,7 +289,7 @@
                             <div class="col-sm-12"> 
                                 <div class="col-sm-8 mx-auto">
                                     <div class="form-group">
-                                        <label class="control-label text-uppercase" >Payment Mode</label>
+                                        <label class="control-label text-uppercase" >Delivery Type</label>
                                         <input type="text" name="transaction_payment_mode" id="transaction_payment_mode" class="form-control" readonly>
                                         <span class="invalid-feedback" role="alert">
                                             <strong id="error-transaction_payment_mode"></strong>
@@ -435,79 +454,75 @@
 
                     
                 <!-- Modal body -->
-                <div class="modal-body">
+                <div class="modal-body" >
                     <div id="transaction_detail" class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label class="control-label text-uppercase" >Transaction ID:</label>
-                            <input type="text" name="transaction_id" id="transaction_id" readonly class="form-control"/>
+                       
+                        <div class="col-sm-12">
+                            <h6>TRANSACTION DETAILS</h6>
+                            <table class="table table-bordered table-striped">
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">Transaction ID:</th>
+                                            <td id="transaction_id"></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">DATA TIME:</th>
+                                            <td id="lbl_date_time"></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">REFERENCE NUMBER</th>
+                                            <td id="lbl_reference_number"></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">TRANSFER AMOUNT:</th>
+                                            <td id="lbl_transfer_amount"></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">RECEIVE AMOUNT:</th>
+                                            <td id="lbl_receive_amount"></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">EXCHANGE RATE:</th>
+                                            <td id="lbl_exchange_rate"></td>
+                                        </tr>
+                                    <tr>
+                                            <th scope="row">SERVICE CHARGE:</th>
+                                            <td id="lbl_service_charge"></td>
+                                    </tr>
+                                    <tr>
+                                            <th scope="row">TOTAL TO PAY:</th>
+                                            <td id="lbl_total_to_pay"></td>
+                                    </tr>
+                                    </tbody>
+                            </table>
+
+                            <h6>YOUR BENEFICIARY INFORMATION</h6>
+                            <table class="table table-bordered table-striped">
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">BENEFICIARY NAME:</th>
+                                            <td id="lbl_beneficiary_name"></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">BANK NAME:</th>
+                                            <td id="lbl_bank_name"></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">ACCOUNT NUMBER:</th>
+                                            <td id="lbl_account_number"></td>
+                                        </tr>
+                                    </tbody>
+                            </table>
+                            
                         </div>
                     </div>
-                    <div class="col-sm-12">
-                        <h6>TRANSACTION DETAILS</h6>
-                        <table class="table table-bordered table-striped">
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">DATA TIME:</th>
-                                        <td id="lbl_date_time"></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">REFERENCE NUMBER</th>
-                                        <td id="lbl_reference_number"></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">TRANSFER AMOUNT:</th>
-                                        <td id="lbl_transfer_amount"></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">RECEIVE AMOUNT:</th>
-                                        <td id="lbl_receive_amount"></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">EXCHANGE RATE:</th>
-                                        <td id="lbl_exchange_rate"></td>
-                                    </tr>
-                                   <tr>
-                                        <th scope="row">SERVICE CHARGE:</th>
-                                        <td id="lbl_service_charge"></td>
-                                   </tr>
-                                   <tr>
-                                        <th scope="row">TOTAL TO PAY:</th>
-                                        <td id="lbl_total_to_pay"></td>
-                                   </tr>
-                                </tbody>
-                        </table>
-
-                        <h6>YOUR BENEFICIARY INFORMATION</h6>
-                        <table class="table table-bordered table-striped">
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">BENEFICIARY NAME:</th>
-                                        <td id="lbl_beneficiary_name"></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">BANK NAME:</th>
-                                        <td id="lbl_bank_name"></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">ACCOUNT NUMBER:</th>
-                                        <td id="lbl_account_number"></td>
-                                    </tr>
-                                </tbody>
-                        </table>
-                        
-                    </div>
-                   
-                        
-                    </div>
-
-                    
                 </div>
         
                 <!-- Modal footer -->
                 <div class="modal-footer bg-white">
                     <button type="button" id="transaction_cancel" class="btn btn-danger text-uppercase">CANCEL</button>
-                    <input type="button" data-dismiss="modal" name="transaction_detail_action_button" id="transaction_detail_action_button" class="text-uppercase btn btn-primary" value="CLOSE" />
+                    <input type="button"  id="transaction_detail_print_button" class="text-uppercase btn btn-success" value="PRINT" />
+                    <input type="button" data-dismiss="modal" name="transaction_detail_action_button" id="transaction_detail_action_button" class="text-uppercase btn btn-primary" value="SAVE" />
                 </div>
         
             </div>
@@ -523,6 +538,8 @@ $(function () {
     $('#transaction_confirm').hide();
     $('#transaction_action').hide();
     $('#transaction_beneficiary_id').hide();
+    $('#section_relation_with_beneficiary_others').hide();
+    $('#section_purpose_of_remit_others').hide();
     return loadRecipient();
     
 });
@@ -752,7 +769,7 @@ $(document).on('click', '.send_money_beneficiary', function(){
 
 
 function transaction_details(){
-    var transaction_id = $('#transaction_id').val();
+    var transaction_id = $('#transaction_id').text();
     $.ajax({
         url: "/admin/transaction/transaction_details", 
         type: "get",
@@ -766,7 +783,7 @@ function transaction_details(){
         },
         success: function(data){
             $("#transaction_detail_action_button").attr("disabled", false);
-            $("#transaction_detail_action_button").attr("value", "CLOSE");
+            $("#transaction_detail_action_button").attr("value", "SAVE");
 
             $('#lbl_date_time').text(data.date_time);
             $('#lbl_reference_number').text(data.reference_number);
@@ -851,7 +868,7 @@ $('#transactionForm').on('submit', function(event){
                 $('#transactionForm')[0].reset();
                 $('#transactionModal').modal('hide');
                 $('#transactionDetailModal').modal('show');
-                $('#transaction_id').val(data.transaction_id);
+                $('#transaction_id').text(data.transaction_id);
                 transaction_details();
             }
             
@@ -867,7 +884,7 @@ $('#send_amount').on('keyup',function(){
 })
 
 $(document).on('click', '#transaction_cancel', function(){
-  var transaction_id = $('#transaction_id').val();
+  var transaction_id = $('#transaction_id').text();
   $.confirm({
       title: 'Confirmation',
       content: 'You really want cancel this transaction?',
@@ -915,8 +932,38 @@ $(document).on('click', '#transaction_back', function(){
 
 });
 
+$('select[id="payment_mode"]').on("change", function(event){
+  if($(this).val() == 'Cash Pick Up'){
+    $('#section_account_number').hide();
+  }else{
+    $('#section_account_number').show();
+  }
+  
+});
 
+$('select[id="relation_with_beneficiary"]').on("change", function(event){
+  if($(this).val() == 'Others'){
+    $('#section_relation_with_beneficiary_others').show();
+  }else{
+    $('#section_relation_with_beneficiary_others').hide();
+  }
+});
 
+$('select[id="purpose_of_remit"]').on("change", function(event){
+  if($(this).val() == 'Others'){
+    $('#section_purpose_of_remit_others').show();
+  }else{
+    $('#section_purpose_of_remit_others').hide();
+  }
+});
+
+$(document).on('click', '#transaction_detail_print_button', function(){
+        var printContents = document.getElementById('transaction_detail').innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+});
 
 
 </script>

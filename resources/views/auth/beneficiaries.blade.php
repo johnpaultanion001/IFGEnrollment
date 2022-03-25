@@ -34,12 +34,12 @@
                                 <span class="font-weight-bold">Beneficiary Country:</span>
                             </div>
                             <div class="col-6">
-                                <span class="font-weight-bold">{{$beneficiary->receipt_country}}</span>
+                                <span class="font-weight-bold">{{$beneficiary->country->country}}</span>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-6">
-                                <span class="font-weight-bold">Payment Type:</span>
+                                <span class="font-weight-bold">Delivery Type:</span>
                             </div>
                             <div class="col-6">
                                 <span class="font-weight-bold">{{$beneficiary->payment_mode}}</span>

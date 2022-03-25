@@ -32,11 +32,13 @@ class BeneficiaryController extends Controller
             'payment_mode' => ['required'],
             //Payout Location
             'bank_name' => ['required'],
-            'account_number' => ['required'],
+            'account_number' => ['digits:10', 'nullable'],
              //Beneficiary Details
             'beneficiary_firstname' => ['required'],
             'beneficiary_lastname' => ['required'],
             'beneficiary_mobile_number' => ['required'],
+            'beneficiary_email' => ['required','email'],
+
             //Address Details
             'beneficiary_address' => ['required'],
             'purpose_of_remit' => ['required'],
@@ -58,11 +60,14 @@ class BeneficiaryController extends Controller
              'beneficiary_firstname' => $request->input('beneficiary_firstname'),
              'beneficiary_middlename' => $request->input('beneficiary_middlename'),
              'beneficiary_lastname' => $request->input('beneficiary_lastname'),
+             'beneficiary_email' => $request->input('beneficiary_email'),
              'mobile_number' => $request->input('beneficiary_mobile_number'),
              //Address Details
              'address' => $request->input('beneficiary_address'),
              'purpose_of_remit' => $request->input('purpose_of_remit'),
              'relation_with_beneficiary' => $request->input('relation_with_beneficiary'),
+             'relation_with_beneficiary_others' => $request->input('relation_with_beneficiary_others'),
+             'purpose_of_remit_others' => $request->input('purpose_of_remit_others'),
             
         ]);
 
@@ -91,13 +96,15 @@ class BeneficiaryController extends Controller
         $validated =  Validator::make($request->all(), [
             'receipt_country' => ['required'],
             'payment_mode' => ['required'],
+            'account_number' => ['digits:10', 'nullable'],
             //Payout Location
             'bank_name' => ['required'],
-            'account_number' => ['required'],
+            
              //Beneficiary Details
             'beneficiary_firstname' => ['required'],
             'beneficiary_lastname' => ['required'],
             'beneficiary_mobile_number' => ['required'],
+            'beneficiary_email' => ['required','email'],
             //Address Details
             'beneficiary_address' => ['required'],
             'purpose_of_remit' => ['required'],
@@ -117,11 +124,14 @@ class BeneficiaryController extends Controller
              'beneficiary_firstname' => $request->input('beneficiary_firstname'),
              'beneficiary_middlename' => $request->input('beneficiary_middlename'),
              'beneficiary_lastname' => $request->input('beneficiary_lastname'),
+             'beneficiary_email' => $request->input('beneficiary_email'),
              'mobile_number' => $request->input('beneficiary_mobile_number'),
              //Address Details
              'address' => $request->input('beneficiary_address'),
              'purpose_of_remit' => $request->input('purpose_of_remit'),
              'relation_with_beneficiary' => $request->input('relation_with_beneficiary'),
+             'relation_with_beneficiary_others' => $request->input('relation_with_beneficiary_others'),
+             'purpose_of_remit_others' => $request->input('purpose_of_remit_others'),
         ]);
 
         return response()->json(['success' => 'Beneficiary Updated Successfully.']);

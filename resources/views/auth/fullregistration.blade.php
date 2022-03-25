@@ -347,6 +347,9 @@
                                     <button type="button" id="add_beneficiary" class="btn btn-info btn-lg">Add Beneficiary</button>
                                     <button type="button" id="action_back" class="btn btn-lg">Back</button>
                                     <input type="submit" name="action_button" id="action_button" class="btn btn-primary btn-lg" value="Next" />
+                                    @if(Auth()->user()->isRegistered == 1)
+                                        <input type="button" name="cancel_button" id="cancel_button" class="btn btn-danger text-right btn-lg" value="Cancel" />
+                                    @endif
                                 </div>
                             </div>
                             
@@ -398,7 +401,7 @@
 
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label class="control-label text-uppercase" >Payment Mode <span class="text-danger">*</span> </label>
+                                <label class="control-label text-uppercase" >Delivery Type <span class="text-danger">*</span> </label>
                                 <select name="payment_mode" id="payment_mode" class="form-control select2" style="width: 100%">
                                     <option value="" disabled selected>Please Select</option>
                                     <option value="Account Deposit">Account Deposit</option>
@@ -430,7 +433,7 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-6" id="section_account_number">
                             <div class="form-group">
                                 <label class="control-label text-uppercase" >Account Number:<span class="text-danger">*</span> </label>
                                 <input type="number" name="account_number" id="account_number" class="form-control" />
@@ -473,10 +476,56 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
+                                <label class="control-label text-uppercase" >Beneficiary Email<span class="text-danger">*</span></label>
+                                <input type="email" name="beneficiary_email" id="beneficiary_email" class="form-control" />
+                                <span class="invalid-feedback" role="alert">
+                                    <strong id="error-beneficiary_email"></strong>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
                                 <label class="control-label text-uppercase" >Mobile Number<span class="text-danger">*</span></label>
                                 <input type="number" name="beneficiary_mobile_number" id="beneficiary_mobile_number" class="form-control" />
                                 <span class="invalid-feedback" role="alert">
                                     <strong id="error-beneficiary_mobile_number"></strong>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="control-label text-uppercase" >Relation with Beneficiary<span class="text-danger">*</span> </label>
+                                <select name="relation_with_beneficiary" id="relation_with_beneficiary" class="form-control select2" style="width: 100%">
+                                    <option value="" disabled selected>Please Select</option>
+                                    <option value="Aunt">Aunt</option>
+                                    <option value="Brother">Brother</option>
+                                    <option value="Brother in Law">Brother in Law</option>
+                                    <option value="Cousin">Cousin</option>
+                                    <option value="Daughter">Daughter</option>
+                                    <option value="Daughter in law">Daughter in law</option>
+                                    <option value="Father">Father</option>
+                                    <option value="Father in Law">Father in Law</option>
+                                    <option value="Fiancée">Fiancée</option>
+                                    <option value="Friend">Friend</option>
+                                    <option value="Husband">Husband</option>
+                                    <option value="Mother">Mother</option>
+                                    <option value="Mother in Law">Mother in Law</option>
+                                    <option value="Nephew">Nephew</option>
+                                    <option value="Niece">Niece</option>
+                                    <option value="Sister">Sister</option>
+                                    <option value="Sister in Law">Sister in Law</option>
+                                    <option value="Spouse">Spouse</option>
+                                    <option value="Staff">Staff</option>
+                                    <option value="Uncle">Uncle</option>
+                                    <option value="Wife">Wife</option>
+                                    <option value="Others">Others</option>
+                                </select>
+                                <div id="section_relation_with_beneficiary_others">
+                                    <label class="control-label text-uppercase" >Others<span class="text-danger">*</span> </label>
+                                    <input type="text" name="relation_with_beneficiary_others" id="relation_with_beneficiary_others" class="form-control" />
+                                </div>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong id="error-relation_with_beneficiary"></strong>
                                 </span>
                             </div>
                         </div>
@@ -512,47 +561,17 @@
                                     <option value="Salary">Salary</option>
                                     <option value="Savings">Savings</option>
                                     <option value="Others">Others</option>
-
-                                
                                 </select>
+                                <div id="section_purpose_of_remit_others">
+                                    <label class="control-label text-uppercase" >Others<span class="text-danger">*</span> </label>
+                                    <input type="text" name="purpose_of_remit_others" id="purpose_of_remit_others" class="form-control" />
+                                </div>
                                 <span class="invalid-feedback" role="alert">
                                     <strong id="error-purpose_of_remit"></strong>
                                 </span>
                             </div>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label class="control-label text-uppercase" >Relation with Beneficiary<span class="text-danger">*</span> </label>
-                                <select name="relation_with_beneficiary" id="relation_with_beneficiary" class="form-control select2" style="width: 100%">
-                                    <option value="" disabled selected>Please Select</option>
-                                    <option value="Aunt">Aunt</option>
-                                    <option value="Brother">Brother</option>
-                                    <option value="Brother in Law">Brother in Law</option>
-                                    <option value="Cousin">Cousin</option>
-                                    <option value="Daughter">Daughter</option>
-                                    <option value="Daughter in law">Daughter in law</option>
-                                    <option value="Father">Father</option>
-                                    <option value="Father in Law">Father in Law</option>
-                                    <option value="Fiancée">Fiancée</option>
-                                    <option value="Friend">Friend</option>
-                                    <option value="Husband">Husband</option>
-                                    <option value="Mother">Mother</option>
-                                    <option value="Mother in Law">Mother in Law</option>
-                                    <option value="Nephew">Nephew</option>
-                                    <option value="Niece">Niece</option>
-                                    <option value="Sister">Sister</option>
-                                    <option value="Sister in Law">Sister in Law</option>
-                                    <option value="Spouse">Spouse</option>
-                                    <option value="Staff">Staff</option>
-                                    <option value="Uncle">Uncle</option>
-                                    <option value="Wife">Wife</option>
-                                    <option value="Others">Others</option>
-                                </select>
-                                <span class="invalid-feedback" role="alert">
-                                    <strong id="error-relation_with_beneficiary"></strong>
-                                </span>
-                            </div>
-                        </div>
+                        
                         
                        
                         
@@ -726,6 +745,8 @@ $(document).ready(function () {
     $('#create_your_beneficiary').hide();
     $('#action_back').hide();
     $('#add_beneficiary').hide();
+    $('#section_relation_with_beneficiary_others').hide();
+    $('#section_purpose_of_remit_others').hide();
     
     var id = $('#hidden_id').val();
 
@@ -1140,6 +1161,36 @@ $('#idForm').on('submit', function(event){
     });
     
 });
+
+$('select[id="payment_mode"]').on("change", function(event){
+  if($(this).val() == 'Cash Pick Up'){
+    $('#section_account_number').hide();
+  }else{
+    $('#section_account_number').show();
+  }
+  
+});
+
+$('select[id="relation_with_beneficiary"]').on("change", function(event){
+  if($(this).val() == 'Others'){
+    $('#section_relation_with_beneficiary_others').show();
+  }else{
+    $('#section_relation_with_beneficiary_others').hide();
+  }
+});
+
+$('select[id="purpose_of_remit"]').on("change", function(event){
+  if($(this).val() == 'Others'){
+    $('#section_purpose_of_remit_others').show();
+  }else{
+    $('#section_purpose_of_remit_others').hide();
+  }
+});
+
+$(document).on('click', '#cancel_button', function(){
+    window.location.href = "/admin/home";
+});
+
 
 
 
