@@ -2650,13 +2650,12 @@ fieldset[disabled] .btn-link.active {
 }
 
 .form-control {
-  background-color: transparent;
-  border: 1px solid #E3E3E3;
-  border-radius: 30px;
+ 
+  border: 1px solid #2c2c2c !important;
   color: #2c2c2c;
   height: auto;
   line-height: normal;
-  font-size: 0.8571em;
+  font-size: 1em;
   -webkit-transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
   -moz-transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
   -o-transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
@@ -2875,6 +2874,10 @@ fieldset[disabled] .btn-link.active {
   color: #18ce0f;
 }
 
+.control-label{
+  font-size: 15px;
+}
+
 .input-group-text {
   background-color: #FFFFFF;
   border: 1px solid #E3E3E3;
@@ -2974,7 +2977,7 @@ fieldset[disabled] .btn-link.active {
 .form-control[readonly],
 fieldset[disabled] .form-control {
   background-color: #E3E3E3;
-  color: #888888;
+ 
   cursor: not-allowed;
 }
 
@@ -3030,7 +3033,7 @@ textarea.form-control:active {
 
 .form-check {
   margin-top: .65rem;
-  padding-left: 0;
+  padding-left: 15px;
 }
 
 .form-check .form-check-label {
@@ -3092,9 +3095,8 @@ textarea.form-control:active {
 
 .form-check input[type="checkbox"],
 .radio input[type="radio"] {
-  opacity: 0;
+
   position: absolute;
-  visibility: hidden;
 }
 
 .form-check input[type="checkbox"]:checked+.form-check-sign::after {
@@ -5534,7 +5536,7 @@ img {
 }
 
 .card-signup {
-  max-width: 350px;
+  max-width: 450px;
   margin: 0 auto;
 }
 
@@ -5953,7 +5955,7 @@ img {
 }
 
 .section_register {
-  padding: 70px 0;
+  padding: 20px 0;
   position: relative;
   background: #FFFFFF;
 }
@@ -7315,6 +7317,14 @@ img {
   .index-page .page-header .category-absolute {
     margin-top: -330px;
   }
+}
+
+input[type="radio"]:checked {
+  background-color: #93e026 !important;
+}
+
+.border-primary{
+  border-color: #910000  !important;
 }
 
 

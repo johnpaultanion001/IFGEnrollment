@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Rules\ValidReferralCode;
+use App\Models\ReferralCode;
 
 class RegisterController extends Controller
 {
@@ -51,31 +53,27 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string' ,'confirmed'
-                            ,'min:8'
-                            ,'regex:/[A-Z]/'
-                            ,'regex:/[a-z]/'
-                            ,'regex:/[0-9]/'
-                        ],
+            'referral_code' => ['required',new ValidReferralCode],
+            'password' => ['required', 'string' ,'confirmed','min:8'],
         ]);
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
+  
     protected function create(array $data)
     {
         $user = User::create([
             'email' => $data['email'],
+            'referral_code' => $data['referral_code'],
             'password' => Hash::make($data['password']),
         ]);
 
         RoleUser::insert([
             'user_id' => $user->id,
-            'role_id' => 3,
+            'role_id' => 5,
+        ]);
+
+        ReferralCode::where('referral_code', $data['referral_code'])->where('isUsed',false)->update([
+            'isUsed' => true
         ]);
 
         return $user;

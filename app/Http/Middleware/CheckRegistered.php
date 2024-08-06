@@ -18,7 +18,7 @@ class CheckRegistered
     public function handle(Request $request, Closure $next)
     {
         if (auth()->user()->isRegistered == 0) {
-            return redirect()->to('admin/fullregistration');
+            return redirect()->to('admin/admin_sales');
         }
         return $next($request);
     }

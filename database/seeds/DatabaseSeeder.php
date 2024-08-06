@@ -13,9 +13,6 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             RoleUserTableSeeder::class,
           
-            BankSeeder::class,
-            PhilippineProvincesTableSeeder::class,
-            PhilippineCitiesTableSeeder::class,
           
             
         ]);

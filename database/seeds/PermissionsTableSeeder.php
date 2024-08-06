@@ -12,7 +12,13 @@ class PermissionsTableSeeder extends Seeder
                 'title' => 'admin_access',
             ],
             [
-                'title' => 'staff_access',
+                'title' => 'sales_access',
+            ],
+            [
+                'title' => 'billing_access',
+            ],
+            [
+                'title' => 'accounting_access',
             ],
             [
                 'title' => 'user_access',

@@ -1,5 +1,6 @@
 <?php
 
 return [
-    'site_title' => 'Japan Remit Finance Co.,Ltd',
+    'site_title' => 'ValuCare',
+    'site_favIcon' => 'images/vclogo/logo.png',
 ];

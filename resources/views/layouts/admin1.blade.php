@@ -1,32 +1,31 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets_admin/img/apple-icon.png') }}">
- 
-  <link rel="icon" type="image/png" href="{{ asset('assets_admin/img/favicon.png') }}">
-  
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>
-    {{ trans('panel.site_title') }}
-  </title>
-  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-  <!--     Fonts and icons     -->
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-  <script src="https://kit.fontawesome.com/e64ab92996.js" crossorigin="anonymous"></script>
-  <!-- CSS Files -->
-  <link  href="{{ asset('assets_admin/css/bootstrap.min.css') }}" rel="stylesheet" />
-  
-  <link href="{{ asset('assets_admin/css/now-ui-kit.css?v=1.3.0') }}" rel="stylesheet" />
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets_admin/img/apple-icon.png') }}">
 
-  <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="{{ asset('assets_admin/demo/demo.css') }}" rel="stylesheet" />
-  <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="{{ trans('panel.site_favIcon') }}">
 
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        {{ trans('panel.site_title') }}
+    </title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/e64ab92996.js" crossorigin="anonymous"></script>
+    <!-- CSS Files -->
+    <link href="{{ asset('assets_admin/css/bootstrap.min.css') }}" rel="stylesheet" />
+
+    <link href="{{ asset('assets_admin/css/now-ui-kit.css?v=1.3.0') }}" rel="stylesheet" />
+
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="{{ asset('assets_admin/demo/demo.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet" />
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 
     <!-- datatables -->
     <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
@@ -35,87 +34,127 @@
     <link href="https://cdn.datatables.net/select/1.3.0/css/select.dataTables.min.css" rel="stylesheet" />
 
 
-  <style>
-      .form-control[readonly] {
-        background-color: whitesmoke;
-        font-weight: bold;
-      }
-      .form-control{
-        font-weight: bold;
-      }
-      .select2{
-        color: black;
-        font-weight: bold;
-      }
-      .active{
-          font-weight: bold;
-          border-bottom: solid white 1px;
-      }
-      .scrollable{
-        overflow-y: auto;
-        max-height: 300px;
-      }
-      .pac-container { z-index: 100000 !important; }
-     
-     
-  </style>
-  @yield('styles')
+    <style>
+        .form-control[readonly] {
+            background-color: whitesmoke;
+            font-weight: bold;
+        }
+
+        .form-control {
+            font-weight: bold;
+        }
+
+        .select2 {
+            color: black;
+            font-weight: bold;
+        }
+
+        .active {
+            font-weight: bold;
+            border-bottom: solid white 1px;
+        }
+
+        .scrollable {
+            overflow-y: auto;
+            max-height: 300px;
+        }
+
+        .pac-container {
+            z-index: 100000 !important;
+        }
+    </style>
+    @yield('styles')
 </head>
 
 <body class="index-page sidebar-collapse">
-  @include('partials.admin.navbar')
-  <div class="wrapper">
-      <div class="main">
-       <div class="row">
-            <div id="success-alert" class="col-4 alert text-white fade show fixed-top mt-4" data-dismiss="alert" style="margin-left: 65%; z-index: 9999;" role="alert"></div>
+    @include('partials.admin.navbar')
+    <div class="wrapper">
+        <div class="main">
+            <div class="row">
+                <div id="success-alert" class="col-4 alert text-white fade show fixed-top mt-4" data-dismiss="alert" style="margin-left: 65%; z-index: 9999;" role="alert"></div>
+            </div>
+            @yield('content')
         </div>
-        @yield('content')
-      </div>
-  </div>
-  <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
-      {{ csrf_field() }}
-  </form>
+    </div>
+    <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
+        {{ csrf_field() }}
+    </form>
 
-  
 
-  <!--   Core JS Files   -->
- 
-  <script src="{{ asset('/assets_admin/js/core/jquery.min.js') }}" type="text/javascript"></script>
 
-  <script src="{{ asset('/assets_admin/js/core/popper.min.js') }}" type="text/javascript"></script>
- 
-  <script src="{{ asset('/assets_admin/js/core/bootstrap.min.js') }}" type="text/javascript"></script>
+    <!--   Core JS Files   -->
 
-  <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
-  <script   src="{{ asset('/assets_admin/js/plugins/bootstrap-switch.js') }}"></script>
+    <script src="{{ asset('/assets_admin/js/core/jquery.min.js') }}" type="text/javascript"></script>
 
-  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-  <script src="{{ asset('/assets_admin/js/plugins/nouislider.min.js') }}" type="text/javascript"></script>
-  <!--  Plugin for the DatePicker, full documentation here: https://github.com/uxsolutions/bootstrap-datepicker -->
-    
-  <script src="{{ asset('/assets_admin/js/plugins/bootstrap-datepicker.js') }}" type="text/javascript"></script>
-  <!--  Google Maps Plugin    -->
-  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
-  <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
- 
-  <script src="{{ asset('/assets_admin/js/now-ui-kit.js?v=1.3.0') }}" type="text/javascript"></script>
-  <script>
-         $(document).ready(function () {
+    <script src="{{ asset('/assets_admin/js/core/popper.min.js') }}" type="text/javascript"></script>
+
+    <script src="{{ asset('/assets_admin/js/core/bootstrap.min.js') }}" type="text/javascript"></script>
+
+    <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+    <script src="{{ asset('/assets_admin/js/plugins/bootstrap-switch.js') }}"></script>
+
+    <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+    <script src="{{ asset('/assets_admin/js/plugins/nouislider.min.js') }}" type="text/javascript"></script>
+    <!--  Plugin for the DatePicker, full documentation here: https://github.com/uxsolutions/bootstrap-datepicker -->
+
+    <script src="{{ asset('/assets_admin/js/plugins/bootstrap-datepicker.js') }}" type="text/javascript"></script>
+    <!--  Google Maps Plugin    -->
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
+    <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
+
+    <script src="{{ asset('/assets_admin/js/now-ui-kit.js?v=1.3.0') }}" type="text/javascript"></script>
+    <script>
+        $(document).ready(function() {
             $('.select2').select2()
-            $('.treeview').each(function () {
-            var shouldExpand = false
-            $(this).find('li').each(function () {
-                if ($(this).hasClass('active')) {
-                    shouldExpand = true
-                }
-            })
+            $('.treeview').each(function() {
+                var shouldExpand = false
+                $(this).find('li').each(function() {
+                    if ($(this).hasClass('active')) {
+                        shouldExpand = true
+                    }
+                })
                 if (shouldExpand) {
                     $(this).addClass('active')
                 }
             })
 
-            
+            $('.modal').on("hidden.bs.modal", function(e) {
+                if ($('.modal:visible').length) {
+                    $('body').addClass('modal-open');
+                }
+            });
+
+
         });
+
+        function alertPopup(title, typeOfAlert) {
+            if (typeOfAlert == "success") {
+                $('#success-alert').removeClass('bg-danger');
+                $('#success-alert').addClass('bg-success');
+            }
+            if (typeOfAlert == "error") {
+                $('#success-alert').removeClass('bg-success');
+                $('#success-alert').addClass('bg-danger');
+            }
+
+            $('#success-alert').html('<strong> ' + title + ' </strong>');
+            $("#success-alert").fadeTo(5000, 500).slideUp(500, function() {
+                $("#success-alert").slideUp(500);
+            });
+        }
+
+        function number_format(numberString) {
+            nStr += '';
+            x = nStr.split('.');
+            x1 = x[0];
+            x2 = x.length > 1 ? '.' + x[1] : '';
+            var rgx = /(\d+)(\d{3})/;
+            while (rgx.test(x1)) {
+                x1 = x1.replace(rgx, '$1' + ',' + '$2');
+            }
+            return x1 + x2;
+        }
+
        
     </script>
 
@@ -124,21 +163,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 
-     <!-- datatables -->
-        <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-        <script src="//cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js"></script>
-        <script src="//cdn.datatables.net/buttons/1.2.4/js/buttons.flash.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.print.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.colVis.min.js"></script>
-        <script src="https://cdn.datatables.net/select/1.3.0/js/dataTables.select.min.js"></script>
-        <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
-        <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+    <!-- datatables -->
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="//cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js"></script>
+    <script src="//cdn.datatables.net/buttons/1.2.4/js/buttons.flash.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.colVis.min.js"></script>
+    <script src="https://cdn.datatables.net/select/1.3.0/js/dataTables.select.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
 
 
 
-    
+
     <script>
         $(function() {
             let copyButtonTrans = 'COPY'
@@ -149,80 +188,81 @@
             let colvisButtonTrans = 'VIEW'
 
             let languages = {
-            'en': 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/English.json'
+                'en': 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/English.json'
             };
 
-            $.extend(true, $.fn.dataTable.Buttons.defaults.dom.button, { className: 'btn btn-sm m-2 btn-primary' })
+            $.extend(true, $.fn.dataTable.Buttons.defaults.dom.button, {
+                className: 'btn btn-sm m-2 btn-primary'
+            })
             $.extend(true, $.fn.dataTable.defaults, {
-            language: {
-                url: languages['{{ app()->getLocale() }}']
-            },
-            
-            order: [],
-            scrollX: true,
-            pageLength: 100,
-            dom: 'lBfrtip<"actions">',
-            buttons: [
-                {
-                extend: 'copy',
-                className: 'btn-warning btn-sm mt-1 mb-1 copies',
-                text: copyButtonTrans,
-                exportOptions: {
-                    columns: ':visible'
-                }
+                language: {
+                    url: languages['{{ app()->getLocale() }}']
                 },
-                {
-                extend: 'csv',
-                className: 'btn-warning btn-sm mt-1 mb-1',
-                text: csvButtonTrans,
-                exportOptions: {
-                    columns: ':visible'
-                }
-                },
-                {
-                extend: 'excel',
-                className: 'btn-warning btn-sm mt-1 mb-1',
-                text: excelButtonTrans,
-                exportOptions: {
-                    columns: ':visible'
-                }
-                },
-                {
-                extend: 'pdf',
-                className: 'btn-warning btn-sm mt-1 mb-1',
-                text: pdfButtonTrans,
-                exportOptions: {
-                    columns: ':visible'
-                }
-                },
-                {
-                    extend: 'print',
-                    className: 'btn-warning btn-sm mt-1 mb-1',
-                    titleAttr: 'Click this print',
-                    text: printButtonTrans,
-                    exportOptions: {
-                    columns: ':visible'
-                    },
 
-                },
-                {
-                extend: 'colvis',
-                className: 'btn-warning btn-sm mt-1 mb-1',
-                text: colvisButtonTrans,
-                exportOptions: {
-                    columns: ':visible'
-                }
-                
-                }
-            ]
+                order: [],
+                scrollX: true,
+                pageLength: 100,
+                dom: 'lBfrtip<"actions">',
+                buttons: [{
+                        extend: 'copy',
+                        className: 'btn-warning btn-sm mt-1 mb-1 copies',
+                        text: copyButtonTrans,
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'csv',
+                        className: 'btn-warning btn-sm mt-1 mb-1',
+                        text: csvButtonTrans,
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        className: 'btn-warning btn-sm mt-1 mb-1',
+                        text: excelButtonTrans,
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        className: 'btn-warning btn-sm mt-1 mb-1',
+                        text: pdfButtonTrans,
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        className: 'btn-warning btn-sm mt-1 mb-1',
+                        titleAttr: 'Click this print',
+                        text: printButtonTrans,
+                        exportOptions: {
+                            columns: ':visible'
+                        },
+
+                    },
+                    {
+                        extend: 'colvis',
+                        className: 'btn-warning btn-sm mt-1 mb-1',
+                        text: colvisButtonTrans,
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+
+                    }
+                ]
             });
             $.fn.dataTable.ext.classes.sPageButton = '';
         });
     </script>
-    
-    
+
+
     @yield('scripts')
-    
+
 </body>
 
 </html>
