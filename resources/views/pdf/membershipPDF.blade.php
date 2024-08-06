@@ -16,14 +16,29 @@
     <style>
         .form-control {
             border: 1px solid #111 !important;
+            color: #111;
         }
     </style>
 </head>
 
 <body>
     <div class="card">
-        <div class="card-header" style="background-color: #910000 !important;">
-            <img src="{{ asset('images/vclogo/vc_logo.png') }}" alt="" width="200" hieght="200" />
+        <div class="card-header d-flex justify-content-between" style="background-color: #910000 !important;">
+           <div>
+            <img src="{{ asset('images/vclogo/vc_logo.png') }}" alt="" width="300" height="100" />
+            <h3 class="text-white ml-3">
+                MEMBERSHIP APPLICATION
+            </h3>
+           </div>
+            
+            <div class="col-md-5 text-white small">
+                #33 Meralco Ave. Brgy. San Antonio Pasig City <br>
+                Trunk Lines: (02) 702-3310 (Medical Services) (02) 702-3388 (Other Departments) <br>
+                Fax No. : (02) 637-9456 <br>
+                24 Hour Hotlines: : 0917-7-WECARE; (02) 687-3219; 0917-8862892 <br>
+                E-mail: wecare@valuecarehealth.com <br>
+                Website: www.valucarehealth.com <br>
+            </div>
         </div>
         <div class="card-body m-3">
             <div class="row">
@@ -39,20 +54,12 @@
                     <div class="form-group">
                         <label class="control-label text-uppercase">Last Name </label>
                         <input type="textarea" name="last_name" id="last_name" class="form-control" />
-
-                        <span class="invalid-feedback" role="alert">
-                            <strong id="error-last_name"></strong>
-                        </span>
-
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label class="control-label  text-uppercase">First Name </label>
                         <input type="text" name="first_name" id="first_name" class="form-control" />
-                        <span class="invalid-feedback" role="alert">
-                            <strong id="error-first_name"></strong>
-                        </span>
 
                     </div>
                 </div>
@@ -60,9 +67,6 @@
                     <div class="form-group">
                         <label class="control-label  text-uppercase">Middle Name</label>
                         <input type="text" name="middle_name" id="middle_name" class="form-control" />
-                        <span class="invalid-feedback" role="alert">
-                            <strong id="error-middle_name"></strong>
-                        </span>
 
                     </div>
                 </div>
@@ -70,9 +74,6 @@
                     <div class="form-group">
                         <label class="control-label">PRESENT ADDRESS </label>
                         <input type="text" name="present_address" id="present_address" class="form-control" />
-                        <span class="invalid-feedback" role="alert">
-                            <strong id="error-present_address"></strong>
-                        </span>
 
                     </div>
                 </div>
@@ -84,9 +85,6 @@
                             <label class="form-check-label" for="permanent_address_checkbox">Same to present address?</label>
                         </div>
                         <input type="text" name="permanent_address" id="permanent_address" class="form-control" />
-                        <span class="invalid-feedback" role="alert">
-                            <strong id="error-permanent_address"></strong>
-                        </span>
 
                     </div>
                 </div>
@@ -95,9 +93,6 @@
                         <label class="control-label text-uppercase">HOME PHONE </label>
                         <input type="textarea" name="home_phone" id="home_phone" class="form-control" />
 
-                        <span class="invalid-feedback" role="alert">
-                            <strong id="error-home_phone"></strong>
-                        </span>
 
                     </div>
                 </div>
@@ -105,9 +100,7 @@
                     <div class="form-group">
                         <label class="control-label  text-uppercase">MOBILE NO. </label>
                         <input type="text" name="mobile_no" id="mobile_no" class="form-control" />
-                        <span class="invalid-feedback" role="alert">
-                            <strong id="error-mobile_no"></strong>
-                        </span>
+
 
                     </div>
                 </div>
@@ -115,9 +108,7 @@
                     <div class="form-group">
                         <label class="control-label  text-uppercase">EMAIL ADDRESS </label>
                         <input type="text" name="email_address" id="email_address" class="form-control" />
-                        <span class="invalid-feedback" role="alert">
-                            <strong id="error-email_address"></strong>
-                        </span>
+
 
                     </div>
                 </div>
@@ -125,19 +116,15 @@
                     <div class="form-group">
                         <label class="control-label">PLACE OF BIRTH </label>
                         <input type="text" name="place_of_birth" id="place_of_birth" class="form-control" />
-                        <span class="invalid-feedback" role="alert">
-                            <strong id="error-place_of_birth"></strong>
-                        </span>
+
 
                     </div>
                 </div>
                 <div class="col-sm-3">
                     <div class="form-group">
                         <label class="control-label">Date Of Birth </label>
-                        <input type="date" name="date_of_birth" id="date_of_birth" class="form-control" />
-                        <span class="invalid-feedback" role="alert">
-                            <strong id="error-date_of_birth"></strong>
-                        </span>
+                        <input type="text" name="date_of_birth" id="date_of_birth" class="form-control" />
+
 
                     </div>
                 </div>
@@ -145,9 +132,7 @@
                     <div class="form-group">
                         <label class="control-label">HEIGHT </label>
                         <input type="input" name="height" id="height" class="form-control" />
-                        <span class="invalid-feedback" role="alert">
-                            <strong id="error-height"></strong>
-                        </span>
+
 
                     </div>
                 </div>
@@ -155,9 +140,7 @@
                     <div class="form-group">
                         <label class="control-label">WEIGHT</label>
                         <input type="input" name="weight" id="weight" class="form-control" />
-                        <span class="invalid-feedback" role="alert">
-                            <strong id="error-weight"></strong>
-                        </span>
+
 
                     </div>
                 </div>
@@ -165,38 +148,21 @@
                     <div class="form-group">
                         <label class="control-label">CITIZENSHIP </label>
                         <input type="text" name="citizenship" id="citizenship" class="form-control" />
-                        <span class="invalid-feedback" role="alert">
-                            <strong id="error-citizenship"></strong>
-                        </span>
+
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label class="control-label">Gender </label>
-                        <select name="gender" id="gender" class="select2 form-control" style="width: 100%">
-                            <option value="" disabled selected>Please Select</option>
-                            <option value="MALE">MALE</option>
-                            <option value="FEMALE">FEMALE</option>
-                            <option value="OTHER">OTHER</option>
-                        </select>
-                        <span class="invalid-feedback" role="alert">
-                            <strong id="error-gender"></strong>
-                        </span>
+                        <input type="text" name="gender" id="gender" class="form-control" />
+
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label class="control-label">Civil Status </label>
-                        <select name="civil_status" id="civil_status" class="select2 form-control" style="width: 100%">
-                            <option value="" disabled selected>Please Select</option>
-                            <option value="SINGLE">SINGLE</option>
-                            <option value="MARRIED">MARRIED</option>
-                            <option value="WIDOWER">WIDOWER</option>
-                            <option value="LEGALLY SEPARATED">LEGALLY SEPARATED</option>
-                        </select>
-                        <span class="invalid-feedback" role="alert">
-                            <strong id="error-civil_status"></strong>
-                        </span>
+                        <input type="text" name="civil_status" id="civil_status" class="form-control" />
+
                     </div>
                 </div>
                 <div class="row">
@@ -209,44 +175,28 @@
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label class="control-label">EMPLOYMENT STATUS </label>
-                            <select name="employment_status" id="employment_status" class="select2 form-control" style="width: 100%">
-                                <option value="" disabled selected>Please Select</option>
-                                <option value="EMPLOYED IN PRIVATE">EMPLOYED IN PRIVATE</option>
-                                <option value="EMPLOYED IN GOVERNMENT">EMPLOYED IN GOVERNMENT</option>
-                                <option value="SELF EMPLOYED">SELF EMPLOYED</option>
-                                <option value="OFW">OFW</option>
-                                <option value="OTHERS">OTHERS</option>
-                            </select>
-                            <span class="invalid-feedback" role="alert">
-                                <strong id="error-employment_status"></strong>
-                            </span>
+                            <input type="text" name="employment_status" id="employment_status" class="form-control" />
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label class="control-label">EMPLOYER /BUSINESS NAME </label>
                             <input type="text" name="employer_business_name" id="employer_business_name" class="form-control" />
-                            <span class="invalid-feedback" role="alert">
-                                <strong id="error-employer_business_name"></strong>
-                            </span>
+
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label class="control-label">NATURE OF BUSINESS</label>
                             <input type="text" name="nature_of_business" id="nature_of_business" class="form-control" />
-                            <span class="invalid-feedback" role="alert">
-                                <strong id="error-nature_of_business"></strong>
-                            </span>
+
                         </div>
                     </div>
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label class="control-label">BUSINESS ADDRESS </label>
                             <input type="text" name="business_address" id="business_address" class="form-control" />
-                            <span class="invalid-feedback" role="alert">
-                                <strong id="error-business_address"></strong>
-                            </span>
+
                         </div>
                     </div>
                 </div>
@@ -261,15 +211,8 @@
                 <div class="col-sm-12">
                     <div class="form-group">
                         <label class="control-label">TYPE OF ACCOUNT </label>
-                        <select name="type_of_account" id="type_of_account" class="select2 form-control" style="width: 100%">
-                            <option value="" disabled selected>Please Select type of IFG</option>
-                            <option value="INDIVIDUAL">INDIVIDUAL</option>
-                            <option value="FAMILY">FAMILY</option>
-                            <option value="GROUP">GROUP</option>
-                        </select>
-                        <span class="invalid-feedback" role="alert">
-                            <strong id="error-type_of_account"></strong>
-                        </span>
+                        <input type="text" name="type_of_account" id="type_of_account" class="form-control" />
+
                     </div>
                 </div>
                 <div class="col-sm-12">
@@ -332,39 +275,16 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-sm-12">
-                    <div class="form-group ">
-                        <label class="control-label">UPLOAD VALID ID
-                        </label> <br>
-                        <strong class="text-success pointer receipt_view" id="btn_receipt_view">Click here to view your uploaded file</strong>
-
-                        <input type="hidden" name="upload_file_id" id="upload_file_id" class="form-control">
-                        <span class="invalid-feedback" role="alert">
-                            <strong id="error-upload_file_id"></strong>
-                        </span>
-                    </div>
-                </div>
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label class="control-label">DENTAL </label>
-                        <select name="dental" id="dental" class="select2 form-control" style="width: 100%">
-                            <option value="1" selected>YES</option>
-                        </select>
-                        <span class="invalid-feedback" role="alert">
-                            <strong id="error-dental"></strong>
-                        </span>
+                        <input type="text" name="dental" id="dental" class="form-control" />
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label class="control-label">MEMBERSHIP TYPE </label>
-                        <select name="membership_type" id="membership_type" class="select2 form-control" style="width: 100%">
-                            <option value="" disabled selected>Please select</option>
-                            <option value="PRINCIPAL">PRINCIPAL</option>
-                        </select>
-                        <span class="invalid-feedback" role="alert">
-                            <strong id="error-membership_type"></strong>
-                        </span>
+                        <input type="text" name="membership_type" id="membership_type" class="form-control" />
                     </div>
                 </div>
             </div>
@@ -1020,7 +940,6 @@
         </div>
     </div>
 
-    <button id="generate-pdf" class="btn btn-primary">Generate Full Page PDF</button>
     <!-- Bootstrap JS and dependencies -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -1033,6 +952,32 @@
                 return null;
             }
             return decodeURI(results[1]) || 0;
+        }
+
+        function generatePDF(name) {
+            const {
+                jsPDF
+            } = window.jspdf;
+
+            html2canvas(document.body).then(function(canvas) {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const imgWidth = 210; // A4 width in mm
+                const pageHeight = 295; // A4 height in mm
+                const imgHeight = canvas.height * imgWidth / canvas.width;
+                let heightLeft = imgHeight;
+
+                pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+
+                while (heightLeft >= 0) {
+                    pdf.addPage();
+                    pdf.addImage(imgData, 'PNG', 0, heightLeft - imgHeight, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                }
+
+                pdf.save(name + '.pdf');
+            });
         }
 
         function memberData() {
@@ -1054,26 +999,61 @@
                                 $('#' + key).val(value ?? "");
                             } catch {}
                         }
-                        if (key == 'gender') {
-                            $('#' + key).val(value).trigger('change');
+                    })
+                    $.each(data.result.plancode ?? '', function(key, value) {
+                        if (key == key) {
+                            if (key == $('#pc_' + key).attr('name')) {
+                                $('#pc_' + key).val(value)
+                            }
+                            if (key == "plm_code") {
+                                $("#type_of_program").val(value)
+                            }
                         }
-                        if (key == 'civil_status') {
-                            $('#' + key).val(value).trigger('change');
+                    })
+
+                    $.each(data.result.member_health ?? '', function(key, value) {
+                        if (key == $('[name=' + key + "]").attr('name')) {
+                            if (value == true) {
+                                $("#" + key + "1").prop('checked', true);
+                                $("#" + key).prop('checked', true);
+                                $('.' + key).show();
+
+                            } else if (value == false) {
+                                $("#" + key + "2").prop('checked', true);
+                                $('.' + key).hide();
+                            }
                         }
-                        if (key == 'employment_status') {
-                            $('#' + key).val(value).trigger('change');
+                        if (key == 'pick_drink_alcohol') {
+                            if (value == "Beer") {
+                                $("#" + key + "1").prop('checked', true);
+                            } else if (value == "Wine") {
+                                $("#" + key + "2").prop('checked', true);
+                            } else if (value == "Hard Liquor") {
+                                $("#" + key + "3").prop('checked', true);
+                            }
                         }
-                        if (key == 'dental') {
-                            $('#dental').val('1').trigger('change');
+                        if (key == 'physical_exam_history') {
+                            if (value == "Routine Examination") {
+                                $("#" + key + "1").prop('checked', true);
+                                $('.' + key).hide();
+                            } else if (value == "OB-GYN (Obstetrics-Gynecology)") {
+                                $("#" + key + "2").prop('checked', true);
+                                $('.' + key).hide();
+                            } else if (value == "Other(Please Specify)") {
+                                $("#" + key + "3").prop('checked', true);
+                                $('.' + key).show();
+                            } else {
+                                $('.' + key).hide();
+                            }
                         }
-                        if (key == 'membership_type') {
-                            $('#membership_type').val('PRINCIPAL').trigger('change')
-                        }
-                        if (key == 'type_of_account') {
-                            $('#' + key).val(value).trigger('change');
+                        if (key == key) {
+                            $('#' + key).val(value)
                         }
 
+
                     })
+                    var name = data.result.last_name + "_Membership_Application";
+                    generatePDF(name);
 
                 }
 
@@ -1084,34 +1064,8 @@
         };
 
         $(document).ready(function() {
+            $('.form-control').attr('readonly')
             memberData();
-
-
-            $('#generate-pdf').on('click', function() {
-                const {
-                    jsPDF
-                } = window.jspdf;
-
-                html2canvas(document.body).then(function(canvas) {
-                    const imgData = canvas.toDataURL('image/png');
-                    const pdf = new jsPDF('p', 'mm', 'a4');
-                    const imgWidth = 210; // A4 width in mm
-                    const pageHeight = 295; // A4 height in mm
-                    const imgHeight = canvas.height * imgWidth / canvas.width;
-                    let heightLeft = imgHeight;
-
-                    pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
-                    heightLeft -= pageHeight;
-
-                    while (heightLeft >= 0) {
-                        pdf.addPage();
-                        pdf.addImage(imgData, 'PNG', 0, heightLeft - imgHeight, imgWidth, imgHeight);
-                        heightLeft -= pageHeight;
-                    }
-
-                    pdf.save('full-page.pdf');
-                });
-            });
         });
     </script>
 </body>

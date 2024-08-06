@@ -51,9 +51,11 @@
                                     <a class="btn btn-transparent" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <div class="now-ui-icons ui-1_settings-gear-63"></div>
                                     </a>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="btn btn-link m-0 text-reset text-secondary view_quatation" member="{{$data->id ?? ""}}" href="#">View Details</a>
+                                    <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
+                                        <a class="btn btn-link m-0 text-reset text-secondary view_quatation " member="{{$data->id ?? ""}}" href="#">View Details</a>
+                                        <a class="btn btn-link m-0 text-reset text-secondary " href="/admin/membership-pdf?type=principal&referral_code={{$data->referral_code ?? ''}}" target="_blank">Download Membership Application</a>
                                     </div>
+                                   
                                 </div>
                             </td>
                             <td>
@@ -109,7 +111,7 @@
 
             <!-- Modal Header -->
             <div class="modal-header ">
-                <p class="modal-title  text-uppercase font-weight-bold">Quatation Form</p>
+                <p class="modal-title  text-uppercase font-weight-bold">Detail Form</p>
                 <button type="button" class="close " data-dismiss="modal">&times;</button>
             </div>
 
@@ -210,6 +212,7 @@
             </div>
             <div class="modal-footer bg-white">
                 <button type="button" class="btn btn-white text-uppercase" data-dismiss="modal">Close</button>
+               
             </div>
 
         </div>
@@ -2135,6 +2138,7 @@
             dataType: "json",
             beforeSend: function() {},
             success: function(data) {
+                console.log(data.result);
                 $.each(data.result, function(key, value) {
                     if (key == "mem_count") {
                         $('#mem_count').val(value)
@@ -2183,5 +2187,8 @@
         });
 
     });
+    $('#dl_membership').on("click", function(event) {
+    });
+    
 </script>
 @endsection
